@@ -7,5 +7,6 @@ class TokenAPIModel(){
 
 
     @SerializedName("token") lateinit var token: String
-    @SerializedName("detail") lateinit var erro: String
+
+
 }
