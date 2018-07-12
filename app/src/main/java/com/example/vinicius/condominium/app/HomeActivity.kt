@@ -1,12 +1,13 @@
-package com.example.vinicius.condominium
+package com.example.vinicius.condominium.app
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.vinicius.condominium.R
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
     }
 }

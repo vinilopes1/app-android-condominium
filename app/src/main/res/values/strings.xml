@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">condominium</string>
+    <string name="entrar">ENTRAR</string>
+    <string name="usu_rio">Usuário</string>
+    <string name="usuario">Usuário</string>
+    <string name="senha">Senha</string>
+    <string name="digite_sua_senha">Digite sua senha</string>
+    <string name="digite_seu_usu_rio">Digite seu usuário</string>
+    <string name="esqueci_minha_senha">Esqueci minha senha</string>
 </resources>
