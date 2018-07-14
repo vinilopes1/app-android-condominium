@@ -15,31 +15,35 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@android:color/white"
             app:layout_collapseMode="pin"
-            app:layout_scrollFlags="enterAlways|scroll"
-            />
+            app:layout_scrollFlags="enterAlways|scroll"/>
 
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
+            android:background="@android:color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:tabIndicatorColor="@color/colorPrimaryDark"
+            app:tabTextColor="@color/colorSecondary"
+            app:tabSelectedTextColor="@color/colorPrimaryDark">
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Home" />
+                android:icon="@drawable/ic_timeline_black_24dp" />
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Avisos" />
+                android:icon="@drawable/ic_warning_black_24dp" />
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pesquisa" />
+                android:icon="@drawable/ic_search_black_24dp"/>
+
         </android.support.design.widget.TabLayout>
 
 
@@ -56,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@android:drawable/ic_dialog_email"/>
 
 
 </android.support.design.widget.CoordinatorLayout>
