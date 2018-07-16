@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/white"
+            app:titleTextColor="@color/colorBlack"
             app:layout_collapseMode="pin"
             app:layout_scrollFlags="enterAlways|scroll"/>
 
@@ -54,13 +55,38 @@
 
     <include layout="@layout/content_home" />
 
-    <android.support.design.widget.FloatingActionButton
+    <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email"/>
+        app:menu_icon="@drawable/ic_library_add_white_24dp"
+        app:menu_backgroundColor="@android:color/transparent"
+        app:menu_openDirection="up"
+        app:menu_showShadow="true"
+        app:menu_colorNormal="@color/colorPrimaryDark">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_entrada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Entrada"
+            app:fab_size="mini"
+            android:src="@drawable/ic_entrada_white_24dp"
+            app:fab_colorNormal="@color/colorPrimaryDark"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_ocorrencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Ocorrência"
+            app:fab_size="mini"
+            android:src="@drawable/ic_ocorrencia_white_24dp"
+            app:fab_colorNormal="@color/colorPrimaryDark"/>
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

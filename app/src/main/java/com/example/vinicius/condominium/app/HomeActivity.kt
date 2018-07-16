@@ -38,7 +38,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         toolbar.setNavigationIcon(R.drawable.ic_account_circle_black_36dp)
-        toolbar.setTitleTextColor(R.color.primary_dark_material_dark)
 
         nav_view.setNavigationItemSelectedListener(this)
     }
@@ -69,22 +68,16 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
+            R.id.nav_entradas -> {
 
             }
-            R.id.nav_slideshow -> {
+            R.id.nav_ocorrencias -> {
 
             }
-            R.id.nav_manage -> {
+            R.id.nav_sobre -> {
 
             }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
+            R.id.nav_sair -> {
 
             }
         }
