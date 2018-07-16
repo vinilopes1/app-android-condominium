@@ -37,7 +37,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-        toolbar.setNavigationIcon(R.drawable.ic_account_circle_black_36dp)
+        toolbar.setNavigationIcon(R.drawable.ic_rodrigo)
 
         nav_view.setNavigationItemSelectedListener(this)
     }
@@ -107,7 +107,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
 }
-
+//ADAPTER PRECISA PARA FUNCIONAR
 private operator fun PagerAdapter?.invoke(tabsPager: TabsPager) {
 }
 

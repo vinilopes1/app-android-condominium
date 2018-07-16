@@ -7,10 +7,10 @@
     android:gravity="center">
 
     <TextView
-        android:id="@+id/home_fragment"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Home Fragment"/>
+
 
 </LinearLayout>
