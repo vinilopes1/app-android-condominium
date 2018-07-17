@@ -33,6 +33,7 @@ class HomeFragment: Fragment(){
     }
 
     private fun initComponents() {
+        securityPreferences = SecurityPreferences(this!!.context!!)
         apiService = APIService(getToken())
 
         getPosts()

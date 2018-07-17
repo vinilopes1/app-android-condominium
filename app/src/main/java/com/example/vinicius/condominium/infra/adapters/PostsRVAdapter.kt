@@ -11,6 +11,8 @@ import com.example.vinicius.condominium.R
 import com.example.vinicius.condominium.models.Post
 import kotlinx.android.synthetic.main.item_lista_timeline.view.*
 import org.w3c.dom.Text
+import java.text.SimpleDateFormat
+import java.util.*
 
 class PostsRVAdapter(
     var activity: Activity,
@@ -51,7 +53,7 @@ class PostsRVAdapter(
         var post = posts.get(position)
 
         holder.txtDescricao.text = post.descricao
-        holder.txtDataHora.text = post.data
-        holder.txtNomeUsuario.text = post.informante.usuario.username
+        holder.txtDataHora.text = post.data.split("T")[0].replace("-", "/")
+//        holder.txtNomeUsuario.text = post.informante.usuario.username
     }
 }
