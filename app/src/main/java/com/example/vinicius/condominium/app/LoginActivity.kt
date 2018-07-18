@@ -37,9 +37,9 @@ class LoginActivity : AppCompatActivity() {
         securityPreferences = SecurityPreferences(this)
         progressDialog = initProgressDialog()
 
-//        if(estaLogado()){
-//            initProxActivity()
-//        }
+        if(estaLogado()){
+            initProxActivity()
+        }
 
         btnEntrarLogin.setOnClickListener {
             progressDialog.show()
