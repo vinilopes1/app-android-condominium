@@ -1,5 +1,6 @@
 package com.example.vinicius.condominium.infra.api
 
+import com.example.vinicius.condominium.infra.api.endpoints.AvisoEndPoint
 import com.example.vinicius.condominium.infra.api.endpoints.LoginEndPoint
 import com.example.vinicius.condominium.infra.api.endpoints.PostEndPoint
 import okhttp3.OkHttpClient
@@ -15,6 +16,7 @@ public class APIService{
 
     lateinit var loginEndPoint: LoginEndPoint
     lateinit var postEndPoint: PostEndPoint
+    lateinit var avisoEndPoint: AvisoEndPoint
 
     constructor(Token: String){
 
@@ -33,6 +35,7 @@ public class APIService{
 
         loginEndPoint = this.retrofit.create(LoginEndPoint::class.java)
         postEndPoint = this.retrofit.create(PostEndPoint::class.java)
+        avisoEndPoint = this.retrofit.create(AvisoEndPoint::class.java)
 
     }
 }
