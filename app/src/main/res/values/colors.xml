@@ -6,4 +6,5 @@
     <color name="colorSecondary">#FFA9A9A9</color>
     <color name="colorBlack">#000000</color>
     <color name="colorContent">#EFEEF0</color>
+    <color name="colorLine">#dad6d6</color>
 </resources>
