@@ -1,7 +1,12 @@
 package com.example.vinicius.condominium.infra.adapters
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.VectorDrawable
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +15,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.vinicius.condominium.R
 import com.example.vinicius.condominium.models.Post
+import com.example.vinicius.condominium.utils.VectorDrawableUtils
+import com.vipul.hp_hp.timelineview.TimelineView
 import kotlinx.android.synthetic.main.item_lista_timeline.view.*
+import kotlinx.android.synthetic.main.nav_header_home.view.*
 import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
@@ -25,15 +33,17 @@ class PostsRVAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         var txtNomeUsuario: TextView
-        var txtDataHora: TextView
+        var txtData: TextView
         var txtDescricao: TextView
-        var ivIconPost: ImageView
+        var txtHora: TextView
+        //var ivIconPost: ImageView
 
         init {
             txtNomeUsuario = itemView.findViewById(R.id.txtNomeUsuarioItemTimeline)
-            txtDataHora = itemView.findViewById(R.id.txtDataHoraItemTimeline)
+            txtData = itemView.findViewById(R.id.txtDataItemTimeline)
             txtDescricao = itemView.findViewById(R.id.txtDescricaoItemTimeline)
-            ivIconPost = itemView.findViewById(R.id.ivIconeItemTimeline)
+            txtHora = itemView.findViewById(R.id.txtHoraItemTimeline)
+            //ivIconPost = itemView.findViewById(R.id.ivIconeItemTimeline)
         }
 
     }
@@ -55,15 +65,21 @@ class PostsRVAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var post = posts.get(position)
 
-        holder.txtDescricao.text = post.descricao
-        holder.txtDataHora.text = post.data
-        holder.txtNomeUsuario.text = post.informante.nome
+        var data:String = (post.data).split("-")[0].toString()
 
-        if (post.tipo.equals("entrada")){
-            holder.ivIconPost.setImageResource(R.drawable.ic_entrada_black_24dp)
-        }else if (post.tipo.equals("ocorrencia")){
-            holder.ivIconPost.setImageResource(R.drawable.ic_ocorrencia_black_24dp)
+        if(7 == 7) {
+            data = "${data.get(0)}${data.get(1)}/Jul"
         }
+
+
+        holder.txtDescricao.text = post.descricao
+        holder.txtData.text = data
+        holder.txtNomeUsuario.text = post.informante.nome
+        holder.txtHora.text = (post.data).split("-")[1].split(" ")[1].toString()
+        if(post.tipo == "ocorrencia")
+            holder.itemView.timeline.setMarker(VectorDrawableUtils.getDrawable(context,R.drawable.ic_sms_failed2_black_24dp))
+        else holder.itemView.timeline.setMarker(VectorDrawableUtils.getDrawable(context,R.drawable.ic_input2_black_24dp))
 
     }
 }
+
