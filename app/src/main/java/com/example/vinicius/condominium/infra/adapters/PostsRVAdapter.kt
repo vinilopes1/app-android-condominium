@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.vinicius.condominium.R
 import com.example.vinicius.condominium.models.Post
@@ -26,11 +27,13 @@ class PostsRVAdapter(
         var txtNomeUsuario: TextView
         var txtDataHora: TextView
         var txtDescricao: TextView
+        var ivIconPost: ImageView
 
         init {
             txtNomeUsuario = itemView.findViewById(R.id.txtNomeUsuarioItemTimeline)
             txtDataHora = itemView.findViewById(R.id.txtDataHoraItemTimeline)
             txtDescricao = itemView.findViewById(R.id.txtDescricaoItemTimeline)
+            ivIconPost = itemView.findViewById(R.id.ivIconeItemTimeline)
         }
 
     }
@@ -53,7 +56,14 @@ class PostsRVAdapter(
         var post = posts.get(position)
 
         holder.txtDescricao.text = post.descricao
-        holder.txtDataHora.text = post.data.split("T")[0].replace("-", "/")
-//        holder.txtNomeUsuario.text = post.informante.usuario.username
+        holder.txtDataHora.text = post.data
+        holder.txtNomeUsuario.text = post.informante.nome
+
+        if (post.tipo.equals("entrada")){
+            holder.ivIconPost.setImageResource(R.drawable.ic_entrada_black_24dp)
+        }else if (post.tipo.equals("ocorrencia")){
+            holder.ivIconPost.setImageResource(R.drawable.ic_ocorrencia_black_24dp)
+        }
+
     }
 }
