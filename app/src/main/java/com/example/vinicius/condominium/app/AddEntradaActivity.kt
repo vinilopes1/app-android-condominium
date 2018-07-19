@@ -31,7 +31,6 @@ class AddEntradaActivity : AppCompatActivity() {
 
     private fun initComponents() {
         securityPreferences = SecurityPreferences(this)
-        Toast.makeText(this, "" + this.getToken(), Toast.LENGTH_SHORT).show()
         apiService = APIService(getToken())
     }
 
@@ -44,7 +43,7 @@ class AddEntradaActivity : AppCompatActivity() {
                     Toast.makeText(this@AddEntradaActivity, "Adicionado com sucesso!", Toast.LENGTH_SHORT).show()
                     finish()
                 }else{
-                    Toast.makeText(this@AddEntradaActivity, "Erro " + response.code() + response.message(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AddEntradaActivity, "Erro " + response.code(), Toast.LENGTH_SHORT).show()
                 }
             }
 
