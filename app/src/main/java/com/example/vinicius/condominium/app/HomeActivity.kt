@@ -17,6 +17,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.example.vinicius.condominium.R
+import com.example.vinicius.condominium.utils.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.content_home.*
@@ -24,6 +25,9 @@ import kotlinx.android.synthetic.main.content_home.*
 class HomeActivity(): AppCompatActivity(),
         NavigationView.OnNavigationItemSelectedListener,
         View.OnClickListener{
+
+    lateinit private var securityPreferences: SecurityPreferences
+
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +37,17 @@ class HomeActivity(): AppCompatActivity(),
     }
 
     private fun initComponents() {
+        securityPreferences = SecurityPreferences(this)
         initTab()
         initNavigation()
 
         fab_entrada.setOnClickListener {
             val intent = Intent(this@HomeActivity, AddEntradaActivity::class.java)
+            startActivity(intent)
+        }
+
+        fab_ocorrencia.setOnClickListener {
+            val intent = Intent(this@HomeActivity, AddOcorrenciaActivity::class.java)
             startActivity(intent)
         }
     }
@@ -54,7 +64,7 @@ class HomeActivity(): AppCompatActivity(),
 
             }
             R.id.nav_sair -> {
-
+                logout()
             }
         }
 
@@ -62,10 +72,13 @@ class HomeActivity(): AppCompatActivity(),
         return true
     }
 
+    private fun logout() {
+        securityPreferences.limpar()
+        finish()
+        startActivity(Intent(this, LoginActivity::class.java))
+    }
+
     override fun onClick(v: View?) {
-        if (v!!.id == R.id.fab_entrada){
-            startActivity(Intent(this@HomeActivity, AddEntradaActivity::class.java))
-        }
     }
 
     fun initTab():Unit{
@@ -77,10 +90,10 @@ class HomeActivity(): AppCompatActivity(),
 
     fun setupTab(){
         //SetupTab01
-        tab_layout.getTabAt(0)!!.setIcon(R.drawable.ic_timeline_black_24dp).setText(null)
+        tab_layout.getTabAt(0)!!.setIcon(R.drawable.ic_feed_gray_24dp).setText(null)
 
         //SetupTab02
-        tab_layout.getTabAt(1)!!.setIcon(R.drawable.ic_warning_black_24dp).setText(null)
+        tab_layout.getTabAt(1)!!.setIcon(R.drawable.ic_notifications_gray_24dp).setText(null)
 
         //SetupTab03
         tab_layout.getTabAt(2)!!.setIcon(R.drawable.ic_search_black_24dp).setText(null)

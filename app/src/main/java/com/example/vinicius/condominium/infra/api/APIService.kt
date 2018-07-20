@@ -1,16 +1,13 @@
 package com.example.vinicius.condominium.infra.api
 
-import com.example.vinicius.condominium.infra.api.endpoints.AvisoEndPoint
-import com.example.vinicius.condominium.infra.api.endpoints.EntradaEndPoint
-import com.example.vinicius.condominium.infra.api.endpoints.LoginEndPoint
-import com.example.vinicius.condominium.infra.api.endpoints.PostEndPoint
+import com.example.vinicius.condominium.infra.api.endpoints.*
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 public class APIService{
 
-    private val BASE_URL = "http://10.0.80.155:8000/api/v1/"
+    private val BASE_URL = "http://192.168.43.128:8000/api/v1/"
 
     private lateinit var retrofit:Retrofit
     private lateinit var interceptorAPI: InterceptorAPI
@@ -19,6 +16,7 @@ public class APIService{
     lateinit var postEndPoint: PostEndPoint
     lateinit var avisoEndPoint: AvisoEndPoint
     lateinit var entradaEndPoint: EntradaEndPoint
+    lateinit var ocorrenciaEndPoint: OcorrenciaEndPoint
 
     constructor(Token: String){
 
@@ -39,6 +37,7 @@ public class APIService{
         postEndPoint = this.retrofit.create(PostEndPoint::class.java)
         avisoEndPoint = this.retrofit.create(AvisoEndPoint::class.java)
         entradaEndPoint = this.retrofit.create(EntradaEndPoint::class.java)
+        ocorrenciaEndPoint = this.retrofit.create(OcorrenciaEndPoint::class.java)
 
     }
 }

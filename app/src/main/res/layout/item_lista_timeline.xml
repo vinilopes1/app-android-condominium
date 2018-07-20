@@ -78,10 +78,9 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    android:id="@+id/txtLocalizacao"
+                    android:id="@+id/txtLocalizacaoItemTimeline"
                     android:textSize="15dp"
                     android:paddingLeft="20dp"
-                    android:text="Guarita do Térreo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

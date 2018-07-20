@@ -32,9 +32,14 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".app.AddEntradaActivity"
+        <activity
+            android:name=".app.AddEntradaActivity"
+            android:parentActivityName=".app.HomeActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".app.AddOcorrenciaActivity"
+            android:parentActivityName=".app.HomeActivity"
             android:theme="@style/AppTheme"
-            android:parentActivityName=".app.HomeActivity"></activity>
+            ></activity>
     </application>
 
 </manifest>
