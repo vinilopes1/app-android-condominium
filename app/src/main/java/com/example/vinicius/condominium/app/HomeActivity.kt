@@ -83,7 +83,7 @@ class HomeActivity(): AppCompatActivity(),
 
     fun initTab():Unit{
         val fragmentAdapter = TabsPager(supportFragmentManager)
-        viewpager.adapter=fragmentAdapter
+        viewpager.adapter = fragmentAdapter
         tab_layout.setupWithViewPager(viewpager)
         setupTab()
     }

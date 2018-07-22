@@ -15,8 +15,9 @@ class TabsPager: FragmentStatePagerAdapter{
         when(position) {
             0 -> return "Home"
             1 -> return "Avisos"
-            else
-            -> return "Pesquisa"
+            2 -> return "Pesquisa"
+            else -> return "Message"
+
         }
     }
 
@@ -30,13 +31,14 @@ class TabsPager: FragmentStatePagerAdapter{
             0 -> return homeFragment
             1 -> return avisoFragment
             2 -> return pesquisaFragment
+            3 -> return homeFragment
         }
 
         return null
     }
 
     override fun getCount(): Int {
-        return 3
+        return 4
     }
 
 

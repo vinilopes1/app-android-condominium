@@ -1,0 +1,299 @@
+package com.example.vinicius.condominium.app
+
+import android.content.Context
+import android.os.Bundle
+import android.os.Handler
+import android.support.design.widget.FloatingActionButton
+import android.support.design.widget.Snackbar
+import android.support.design.widget.TabLayout
+import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
+import android.view.View
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
+import com.example.vinicius.condominium.R
+import com.example.vinicius.condominium.R.id.rvAvisos
+import com.example.vinicius.condominium.app.Tweet
+import com.example.vinicius.condominium.app.TweetAdapter
+import com.example.vinicius.condominium.infra.api.APIService
+import com.example.vinicius.condominium.models.Post
+import com.example.vinicius.condominium.utils.CondomaisConstants
+import com.example.vinicius.condominium.utils.SecurityPreferences
+
+
+import com.mikepenz.fontawesome_typeface_library.FontAwesome
+import com.mikepenz.iconics.IconicsDrawable
+import com.mikepenz.iconics.context.IconicsContextWrapper
+import com.mikepenz.ionicons_typeface_library.Ionicons
+import com.mikepenz.materialdrawer.AccountHeader
+import com.mikepenz.materialdrawer.AccountHeaderBuilder
+import com.mikepenz.materialdrawer.Drawer
+import com.mikepenz.materialdrawer.DrawerBuilder
+import com.mikepenz.materialdrawer.model.DividerDrawerItem
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
+import com.mikepenz.materialdrawer.model.interfaces.IProfile
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+import java.util.ArrayList
+
+class MainActivity : AppCompatActivity() {
+
+    lateinit private var mView: View
+    lateinit private var apiService: APIService
+    lateinit private var securityPreferences: SecurityPreferences
+
+    lateinit var toggleProf: ImageView
+    lateinit var mSwipeRefresh: SwipeRefreshLayout
+    lateinit var mBodyMsg: TextView
+    lateinit var mBodyNotif: TextView
+    lateinit var mScreenTitle: TextView
+    lateinit var mSearchBar: LinearLayout
+    lateinit var fab: FloatingActionButton
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
+        initComponents()
+
+        toggleProf = findViewById(R.id.togglePic)
+        mSwipeRefresh = findViewById(R.id.swiperefresh)
+        mBodyMsg = findViewById(R.id.body_msg)
+        mBodyNotif = findViewById(R.id.body_notif)
+        mScreenTitle = findViewById(R.id.screen_title)
+        mSearchBar = findViewById(R.id.search_bar)
+
+        // The tweet now floating button
+
+        fab = findViewById(R.id.fab)
+        fab.setOnClickListener { view ->
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+        }
+
+        // Logic for the side navigation drawer
+
+        // The Account Profiles
+        val profile1 = ProfileDrawerItem().withName("Shrey Dabhi").withEmail("@sdabhi23").withIcon(resources.getDrawable(R.drawable.main_profile_1))
+
+        val headerResult = AccountHeaderBuilder()
+                .withActivity(this)
+                .withCompactStyle(false)
+                .withHeaderBackground(R.drawable.header)
+                .withAccountHeader(R.layout.custom_header)
+                .addProfiles(
+                        profile1
+                )
+                .build()
+
+        val result = DrawerBuilder()
+                .withAccountHeader(headerResult)
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withTranslucentStatusBar(true)
+                .withActionBarDrawerToggle(false)
+                .addDrawerItems(
+
+                        // Adding different options to th side navigation drawer
+                        PrimaryDrawerItem().withIdentifier(2).withName("Agendamentos").withIcon(FontAwesome.Icon.faw_user_o).withSelectable(false),
+                        PrimaryDrawerItem().withIdentifier(3).withName("Reservas").withIcon(FontAwesome.Icon.faw_list_alt).withSelectable(false),
+                        PrimaryDrawerItem().withIdentifier(4).withName("Entregas e Encomendas").withIcon(FontAwesome.Icon.faw_bolt).withSelectable(false),
+                        PrimaryDrawerItem().withIdentifier(5).withName("Visitantes").withIcon(FontAwesome.Icon.faw_clone).withSelectable(false),
+                        DividerDrawerItem(),
+                        PrimaryDrawerItem().withIdentifier(6).withName("Status e Privacidade").withSelectable(false),
+                        PrimaryDrawerItem().withIdentifier(7).withName("Ajuda").withSelectable(false)
+
+                ).withOnDrawerItemClickListener { view, position, drawerItem -> true }
+                .addStickyDrawerItems(
+
+                        // Adding options to the footer of the side navigation drawer
+
+                        SecondaryDrawerItem().withName("Sair do aplicativo").withIcon(FontAwesome.Icon.faw_qrcode).withIconColorRes(R.color.colorAccent2).withTextColorRes(R.color.colorAccent2)
+
+                )
+                .withSelectedItem(0)
+                .build()
+
+        toggleProf.setOnClickListener { view ->
+
+            if (result.isDrawerOpen) {
+                result.closeDrawer()
+            } else {
+                result.openDrawer()
+            }
+
+        }
+
+        mScreenTitle.text = "Home"
+        fab.visibility = View.VISIBLE
+        mSearchBar.visibility = View.GONE
+
+        // Logic for the navigation tabs
+
+        val home = tabs.newTab().setIcon(IconicsDrawable(this).icon(FontAwesome.Icon.faw_home).colorRes(R.color.colorAccent2))
+        val notif = tabs.newTab().setIcon(IconicsDrawable(this).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
+        val search = tabs.newTab().setIcon(IconicsDrawable(this).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.draw_description))
+        val msg = tabs.newTab().setIcon(IconicsDrawable(this).icon(FontAwesome.Icon.faw_envelope_o).colorRes(R.color.draw_description))
+
+        tabs.addTab(home)
+        tabs.addTab(notif)
+        tabs.addTab(search)
+        tabs.addTab(msg)
+
+
+        // Tabs
+        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                if (tabs.getSelectedTabPosition() == 0) {
+
+                    mScreenTitle.text = "Home"
+                    mScreenTitle.visibility = View.VISIBLE
+                    fab.visibility = View.VISIBLE
+                    mSearchBar.visibility = View.GONE
+
+                    mSwipeRefresh.visibility = View.VISIBLE
+                    mBodyMsg.visibility = View.INVISIBLE
+                    mBodyNotif.visibility = View.INVISIBLE
+
+                    home.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.colorAccent2))
+                    notif.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
+                    search.setIcon(IconicsDrawable(applicationContext).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.draw_description))
+                    msg.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_envelope_o).colorRes(R.color.draw_description))
+
+                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(mSearchBar.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+
+                } else if (tabs.getSelectedTabPosition() == 1) {
+
+                    mSwipeRefresh.visibility = View.INVISIBLE
+                    mBodyNotif.visibility = View.VISIBLE
+                    mBodyMsg.visibility = View.INVISIBLE
+
+                    mScreenTitle.text = "Avisos"
+                    mScreenTitle.visibility = View.VISIBLE
+                    fab.visibility = View.GONE
+                    mSearchBar.visibility = View.GONE
+
+                    home.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.draw_description))
+                    notif.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell).colorRes(R.color.colorAccent2))
+                    search.setIcon(IconicsDrawable(applicationContext).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.draw_description))
+                    msg.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_envelope_o).colorRes(R.color.draw_description))
+
+                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(mSearchBar.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+
+                } else if (tabs.getSelectedTabPosition() == 2) {
+
+                    mSwipeRefresh.visibility = View.INVISIBLE
+                    mBodyMsg.visibility = View.INVISIBLE
+                    mBodyNotif.visibility = View.INVISIBLE
+
+                    mScreenTitle.visibility = View.GONE
+                    fab.visibility = View.GONE
+                    mSearchBar.visibility = View.VISIBLE
+
+                    home.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.draw_description))
+                    notif.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
+                    search.setIcon(IconicsDrawable(applicationContext).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.colorAccent2))
+                    msg.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_envelope_o).colorRes(R.color.draw_description))
+
+                } else if (tabs.getSelectedTabPosition() == 3) {
+
+                    mSwipeRefresh.visibility = View.INVISIBLE
+                    mBodyNotif.visibility = View.INVISIBLE
+                    mBodyMsg.visibility = View.VISIBLE
+
+                    mScreenTitle.text = "Messages"
+                    mScreenTitle.visibility = View.VISIBLE
+                    fab.visibility = View.GONE
+                    mSearchBar.visibility = View.GONE
+
+                    home.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.draw_description))
+                    notif.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
+                    search.setIcon(IconicsDrawable(applicationContext).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.draw_description))
+                    msg.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_envelope).colorRes(R.color.colorAccent2))
+
+                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(mSearchBar.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+
+
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+
+            }
+        })
+
+        // Logic for swipe down to refresh
+
+        mSwipeRefresh.setColorSchemeResources(R.color.colorAccent2)
+
+        mSwipeRefresh.setOnRefreshListener { Handler().postDelayed({ mSwipeRefresh.isRefreshing = false }, 5000) }
+
+
+    }
+
+    fun exibirLista(posts: MutableList<Post>){
+        val adapter = TweetAdapter2(this@MainActivity,this!!.applicationContext,posts!!)
+
+
+        rvTweets.adapter = adapter
+
+        var linearLayoutManager = LinearLayoutManager(applicationContext,LinearLayoutManager.VERTICAL,false)
+        linearLayoutManager.scrollToPosition(0)
+        rvTweets.layoutManager = linearLayoutManager
+        rvTweets.setHasFixedSize(true)
+
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+    }
+
+    private fun initComponents() {
+        securityPreferences = SecurityPreferences(applicationContext)
+        apiService = APIService(getToken())
+
+        getPosts()
+    }
+
+    private fun getPosts() {
+        val call = apiService.postEndPoint.getPosts()
+
+        call.enqueue(object: Callback<MutableList<Post>> {
+            override fun onResponse(call: Call<MutableList<Post>>?, response: Response<MutableList<Post>>?) {
+                if (response!!.isSuccessful){
+                    exibirLista(response.body()!!)
+                }else{
+                    Toast.makeText(this@MainActivity, " erro. " + response.code() + " " + response.errorBody().toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<Post>>?, t: Throwable?) {
+                Toast.makeText(this@MainActivity, "Falha na conexão!", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+    }
+    private fun getToken(): String {
+        return securityPreferences.getSavedString(CondomaisConstants.KEY.TOKEN_LOGADO)
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(IconicsContextWrapper.wrap(newBase))
+    }
+
+}

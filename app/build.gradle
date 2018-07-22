@@ -23,6 +23,16 @@ android {
 }
 
 dependencies {
+    implementation("com.mikepenz:materialdrawer:6.0.3@aar") {
+        transitive = true
+    }
+    implementation "com.mikepenz:iconics-core:3.0.0@aar"
+    implementation "com.mikepenz:iconics-views:3.0.0@aar"
+    implementation 'com.mikepenz:fontawesome-typeface:4.7.0.2@aar'
+    implementation 'com.mikepenz:ionicons-typeface:2.0.1.4@aar'
+    implementation 'com.mikepenz:typeicons-typeface:2.0.7.4@aar'
+
+    implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:27.1.1'
