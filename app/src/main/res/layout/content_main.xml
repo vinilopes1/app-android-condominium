@@ -17,20 +17,16 @@
         android:layout_marginBottom="45dp">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvTweets"
+            android:id="@+id/rvPosts"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <TextView
-        android:id="@+id/body_notif"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvAvisos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/tab_notif"
-        android:gravity="center"
-        android:textSize="35sp"
-        android:textStyle="bold"
         android:visibility="invisible"/>
 
     <TextView

@@ -119,8 +119,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="5dp"
                 android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/icStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_check_green_18dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"/>
 
                 <TextView
                     android:id="@+id/txtStatus"

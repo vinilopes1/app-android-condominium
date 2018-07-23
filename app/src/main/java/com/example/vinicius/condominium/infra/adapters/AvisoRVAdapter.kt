@@ -24,7 +24,7 @@ class AvisoRVAdapter(
 
         init {
             txtDescricao = itemView!!.findViewById(R.id.txtDescricaoAviso)
-            txtInformante = itemView!!.findViewById(R.id.txtInformanteAviso)
+            txtInformante = itemView!!.findViewById(R.id.txtNomeInformante)
         }
 
     }

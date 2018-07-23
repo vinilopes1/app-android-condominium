@@ -9,12 +9,15 @@ import android.support.design.widget.TabLayout
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.example.vinicius.condominium.R
+import com.example.vinicius.condominium.infra.adapters.AvisoRVAdapter
 import com.example.vinicius.condominium.infra.api.APIService
+import com.example.vinicius.condominium.models.Aviso
 import com.example.vinicius.condominium.models.Post
 import com.example.vinicius.condominium.utils.CondomaisConstants
 import com.example.vinicius.condominium.utils.SecurityPreferences
@@ -31,6 +34,7 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.aviso_fragment.*
 import kotlinx.android.synthetic.main.content_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -48,6 +52,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var mScreenTitle: TextView
     lateinit var mSearchBar: LinearLayout
     lateinit var fab: FloatingActionButton
+    lateinit var rvAvisos: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,9 +63,9 @@ class MainActivity : AppCompatActivity() {
         toggleProf = findViewById(R.id.togglePic)
         mSwipeRefresh = findViewById(R.id.swiperefresh)
         mBodyMsg = findViewById(R.id.body_msg)
-        mBodyNotif = findViewById(R.id.body_notif)
         mScreenTitle = findViewById(R.id.screen_title)
         mSearchBar = findViewById(R.id.search_bar)
+        rvAvisos = findViewById(R.id.rvAvisos)
 
         // The tweet now floating button
 
@@ -146,10 +151,10 @@ class MainActivity : AppCompatActivity() {
                     mScreenTitle.visibility = View.VISIBLE
                     fab.visibility = View.VISIBLE
                     mSearchBar.visibility = View.GONE
+                    rvAvisos.visibility = View.INVISIBLE
 
                     mSwipeRefresh.visibility = View.VISIBLE
                     mBodyMsg.visibility = View.INVISIBLE
-                    mBodyNotif.visibility = View.INVISIBLE
 
                     home.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.colorAccent2))
                     notif.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
@@ -162,13 +167,13 @@ class MainActivity : AppCompatActivity() {
                 } else if (tabs.getSelectedTabPosition() == 1) {
 
                     mSwipeRefresh.visibility = View.INVISIBLE
-                    mBodyNotif.visibility = View.VISIBLE
                     mBodyMsg.visibility = View.INVISIBLE
 
                     mScreenTitle.text = "Avisos"
                     mScreenTitle.visibility = View.VISIBLE
                     fab.visibility = View.GONE
                     mSearchBar.visibility = View.GONE
+                    rvAvisos.visibility = View.VISIBLE
 
                     home.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.draw_description))
                     notif.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell).colorRes(R.color.colorAccent2))
@@ -182,11 +187,11 @@ class MainActivity : AppCompatActivity() {
 
                     mSwipeRefresh.visibility = View.INVISIBLE
                     mBodyMsg.visibility = View.INVISIBLE
-                    mBodyNotif.visibility = View.INVISIBLE
 
                     mScreenTitle.visibility = View.GONE
                     fab.visibility = View.GONE
                     mSearchBar.visibility = View.VISIBLE
+                    rvAvisos.visibility = View.INVISIBLE
 
                     home.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.draw_description))
                     notif.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
@@ -196,13 +201,13 @@ class MainActivity : AppCompatActivity() {
                 } else if (tabs.getSelectedTabPosition() == 3) {
 
                     mSwipeRefresh.visibility = View.INVISIBLE
-                    mBodyNotif.visibility = View.INVISIBLE
                     mBodyMsg.visibility = View.VISIBLE
 
                     mScreenTitle.text = "Messages"
                     mScreenTitle.visibility = View.VISIBLE
                     fab.visibility = View.GONE
                     mSearchBar.visibility = View.GONE
+                    rvAvisos.visibility = View.INVISIBLE
 
                     home.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.draw_description))
                     notif.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
@@ -237,12 +242,12 @@ class MainActivity : AppCompatActivity() {
     fun exibirLista(posts: MutableList<Post>){
         val adapter = PostRVAdapter2(this@MainActivity,this!!.applicationContext,posts!!)
 
-        rvTweets.adapter = adapter
+        rvPosts.adapter = adapter
 
         var linearLayoutManager = LinearLayoutManager(applicationContext,LinearLayoutManager.VERTICAL,false)
         linearLayoutManager.scrollToPosition(0)
-        rvTweets.layoutManager = linearLayoutManager
-        rvTweets.setHasFixedSize(true)
+        rvPosts.layoutManager = linearLayoutManager
+        rvPosts.setHasFixedSize(true)
 
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
@@ -253,6 +258,7 @@ class MainActivity : AppCompatActivity() {
         apiService = APIService(getToken())
 
         getPosts()
+        getAvisos()
     }
 
     private fun getPosts() {
@@ -279,6 +285,40 @@ class MainActivity : AppCompatActivity() {
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(IconicsContextWrapper.wrap(newBase))
+    }
+
+    private fun getAvisos() {
+
+        val avisosCall = apiService.avisoEndPoint.getAvisos()
+
+        avisosCall.enqueue(object: Callback<MutableList<Aviso>>{
+            override fun onResponse(call: Call<MutableList<Aviso>>?, response: Response<MutableList<Aviso>>?) {
+                if (response!!.isSuccessful){
+                    exibirListaAviso(response!!.body())
+                }else{
+                    Toast.makeText(this@MainActivity, "Erro" + response.message() + " : " + response.errorBody().toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<Aviso>>?, t: Throwable?) {
+                Toast.makeText(this@MainActivity, "Falha na conexão!", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+    }
+
+    private fun exibirListaAviso(avisosList: MutableList<Aviso>?) {
+        val avisoRVAdapter = AvisoRVAdapter(this@MainActivity, this!!.applicationContext, avisosList!!)
+
+        rvAvisos.adapter = avisoRVAdapter
+
+        var linearLayoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+
+        rvAvisos.layoutManager = linearLayoutManager
+        rvAvisos.setHasFixedSize(true)
+
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
     }
 
 }
