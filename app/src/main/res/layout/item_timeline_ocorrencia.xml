@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary2">
+    android:background="@color/colorPrimary2"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/profImg"
@@ -13,7 +20,7 @@
         android:layout_marginTop="14dp"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
-        android:src="@drawable/profile_1"
+        android:src="@drawable/hipolito2"
         app:riv_corner_radius="25dp"
         app:riv_oval="true"/>
 
@@ -29,10 +36,10 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/txtNomeUsuario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Anushka"
+                android:text="Vinícius"
                 android:textColor="@color/draw_head"
                 android:textStyle="bold"
                 android:layout_margin="2.5dp"
@@ -40,17 +47,39 @@
                 android:layout_alignParentStart="true"/>
 
             <TextView
-                android:id="@+id/data"
+                android:id="@+id/txtData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 17 de Maio de 2018"
+                android:text=" 17/Jun"
                 android:layout_margin="2.5dp"
                 android:textSize="15sp"
                 android:textColor="@color/draw_description"
-                android:layout_toEndOf="@id/name"/>
+                android:layout_toEndOf="@id/txtNomeUsuario"/>
 
             <TextView
                 android:id="@+id/dotSep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textAlignment="center"
+                android:layout_margin="2.5dp"
+                android:textSize="15sp"
+                android:textColor="@color/draw_description"
+                android:layout_toEndOf="@id/txtData"/>
+
+            <TextView
+                android:id="@+id/txtHora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15:30"
+                android:textAlignment="center"
+                android:layout_margin="2.5dp"
+                android:textSize="15sp"
+                android:textColor="@color/draw_description"
+                android:layout_toEndOf="@id/dotSep"/>
+
+            <TextView
+                android:id="@+id/dotSep2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="•"
@@ -58,42 +87,40 @@
                 android:layout_margin="2.5dp"
                 android:textSize="15sp"
                 android:textColor="@color/draw_description"
-                android:layout_toEndOf="@id/data"/>
+                android:layout_toEndOf="@id/txtHora"/>
 
             <TextView
-                android:id="@+id/min"
+                android:id="@+id/txtTipoPost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Entrada"
+                android:text="Ocorrência"
                 android:layout_margin="2.5dp"
                 android:textSize="15sp"
                 android:textColor="@color/draw_description"
-                android:layout_toEndOf="@id/dotSep"/>
-
-            <!--<TextView-->
-            <!--android:id="@+id/dropDown"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="{ion_chevron_down}"-->
-            <!--android:textAlignment="center"-->
-            <!--android:layout_marginEnd="10dp"-->
-            <!--android:layout_marginTop="3dp"-->
-            <!--android:textSize="15sp"-->
-            <!--android:textColor="@color/draw_description"-->
-            <!--android:layout_alignParentEnd="true"/>-->
+                android:layout_toEndOf="@id/dotSep2"/>
 
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/content"
+            android:id="@+id/txtDescricao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginStart="2.5dp"
             android:textColor="@color/draw_head"
-            android:text="Hey ! How you doin' ?"
+            android:text="A lâmpada do corredo do bloco 2 está queimada."
             android:layout_marginEnd="10dp"
             android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/imgOcorrencia"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@drawable/content_round"
+            android:backgroundTint="#44322E"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -104,23 +131,47 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:layout_marginStart="5dp"
                 android:gravity="center_vertical">
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/comment"/>
+
                 <TextView
-                    android:id="@+id/txtComment"
+                    android:id="@+id/txtQtdComentários"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
                     android:textColor="@color/draw_description"
-                    android:text="Informada"/>
+                    android:text="50"/>
+                <TextView
+                    android:id="@+id/txtLocalizacao"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Guarita do Térreo"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd"/>
+                <!--NÃO SE APLICA-->
+                <TextView
+                    android:id="@+id/txtStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/colorSecondary"/>
 
 </LinearLayout>
