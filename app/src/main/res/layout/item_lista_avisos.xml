@@ -43,18 +43,40 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
                     <com.makeramen.roundedimageview.RoundedImageView
                             android:id="@+id/profImg"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginStart="2dp"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="bottom"
                             android:src="@drawable/vinicius"
                             app:riv_corner_radius="25dp"
                             app:riv_oval="true"
-                            android:layout_weight="1" />
+                        android:layout_weight="1"/>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"/>
+                        <TextView
+                            android:id="@+id/dropDown"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:text="{ion_chevron_down}"
+                            android:textAlignment="textEnd"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="10dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/draw_description"
+                            android:layout_alignParentEnd="true"
+                            android:layout_weight="2"
+                            />
+
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -81,7 +103,12 @@
                         android:layout_height="0dp"
                         android:layout_weight="3"
                          android:layout_marginEnd="2dp"
-                         android:text="No dia 23/08/2018, faltará energia nas torres A e B devido a manuntenção preventiva do circuito elétrico."/>
+                         android:text="No dia 23/08/2018, faltará energia nas torres A e B devido a manuntenção preventiva do circuito elétrico."
+                         android:ellipsize="end"
+                         android:minLines="3"
+                         android:maxLines="3"
+                         android:scrollHorizontally="true"
+                         />
 
                 </LinearLayout>
 

@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.example.vinicius.condominium.R
 import com.example.vinicius.condominium.infra.adapters.AvisoRVAdapter
+import com.example.vinicius.condominium.infra.adapters.PostsRVAdapter2
 import com.example.vinicius.condominium.infra.api.APIService
 import com.example.vinicius.condominium.models.Aviso
 import com.example.vinicius.condominium.models.Post
@@ -34,7 +35,6 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.aviso_fragment.*
 import kotlinx.android.synthetic.main.content_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -239,8 +239,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun exibirLista(posts: MutableList<Post>){
-        val adapter = PostRVAdapter2(this@MainActivity,this!!.applicationContext,posts!!)
+    fun exibirListaPost(posts: MutableList<Post>){
+        val adapter = PostsRVAdapter2(this@MainActivity, this!!.applicationContext, posts!!)
 
         rvPosts.adapter = adapter
 
@@ -253,21 +253,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun initComponents() {
-        securityPreferences = SecurityPreferences(applicationContext)
-        apiService = APIService(getToken())
-
-        getPosts()
-        getAvisos()
-    }
-
     private fun getPosts() {
         val call = apiService.postEndPoint.getPosts()
 
         call.enqueue(object: Callback<MutableList<Post>> {
             override fun onResponse(call: Call<MutableList<Post>>?, response: Response<MutableList<Post>>?) {
                 if (response!!.isSuccessful){
-                    exibirLista(response.body()!!)
+                    exibirListaPost(response.body()!!)
                 }else{
                     Toast.makeText(this@MainActivity, " erro. " + response.code() + " " + response.errorBody().toString(), Toast.LENGTH_SHORT).show()
                 }
@@ -277,14 +269,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Falha na conexão!", Toast.LENGTH_SHORT).show()
             }
         })
-
-    }
-    private fun getToken(): String {
-        return securityPreferences.getSavedString(CondomaisConstants.KEY.TOKEN_LOGADO)
-    }
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(IconicsContextWrapper.wrap(newBase))
     }
 
     private fun getAvisos() {
@@ -303,9 +287,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<MutableList<Aviso>>?, t: Throwable?) {
                 Toast.makeText(this@MainActivity, "Falha na conexão!", Toast.LENGTH_SHORT).show()
             }
-
         })
-
     }
 
     private fun exibirListaAviso(avisosList: MutableList<Aviso>?) {
@@ -319,6 +301,23 @@ class MainActivity : AppCompatActivity() {
         rvAvisos.setHasFixedSize(true)
 
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+    }
+
+    private fun initComponents() {
+        securityPreferences = SecurityPreferences(applicationContext)
+        apiService = APIService(getToken())
+
+        getPosts()
+        getAvisos()
+    }
+
+
+    private fun getToken(): String {
+        return securityPreferences.getSavedString(CondomaisConstants.KEY.TOKEN_LOGADO)
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(IconicsContextWrapper.wrap(newBase))
     }
 
 }
