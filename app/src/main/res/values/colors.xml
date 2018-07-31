@@ -21,6 +21,7 @@
 
     <color name="draw_head">#000000</color>
     <color name="draw_description">#657786</color>
+    <color name="draw_red">#b30000</color>
 
     <!-- OVERWRITE THESE COLORS FOR A LIGHT THEME -->
     <!-- MaterialDrawer DEFAULT colors -->

@@ -79,15 +79,25 @@
                 android:layout_toEndOf="@id/dotSep"/>
 
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/txtTipoPost"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ocorrência"
-            android:layout_margin="2.5dp"
-            android:textSize="15sp"
-            android:textColor="@color/draw_description" />
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_settings_applications_black_18dp"/>
+
+            <TextView
+                android:id="@+id/txtTipoPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ocorrência"
+                android:layout_margin="2.5dp"
+                android:textSize="10sp"
+                android:textColor="#b30000"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/txtDescricao"

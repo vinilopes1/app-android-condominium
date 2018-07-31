@@ -1,5 +1,6 @@
 package com.example.vinicius.condominium.infra.adapters
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.vinicius.condominium.R
 import com.example.vinicius.condominium.models.Post
+import kotlinx.android.synthetic.main.item_timeline_entrada.view.*
 
 class PostsRVAdapter2(
         var activity: Activity,
@@ -25,8 +27,9 @@ class PostsRVAdapter2(
         lateinit var txtHora: TextView
         lateinit var txtTipoPost: TextView
         lateinit var txtDescricao: TextView
+        lateinit var txtLocalizacao: TextView
         //lateinit var imgOcorrencia: ImageView
-        //lateinit var txtLocalizacao: TextView
+
 
         init{
 
@@ -36,8 +39,8 @@ class PostsRVAdapter2(
             txtHora = itemView!!.findViewById(R.id.txtHora)
             txtTipoPost = itemView!!.findViewById(R.id.txtTipoPost)
             txtDescricao = itemView!!.findViewById(R.id.txtDescricao)
+            txtLocalizacao = itemView!!.findViewById(R.id.txtLocalizacao)
             //imgOcorrencia = itemView!!.findViewById(R.id.imgOcorrencia)
-            //txtLocalizacao = itemView!!.findViewById(R.id.txtLocalizacao)
 
         }
     }
@@ -60,6 +63,7 @@ class PostsRVAdapter2(
         return posts.size
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var post = posts.get(position)
 
@@ -69,15 +73,27 @@ class PostsRVAdapter2(
             holder.txtHora.text = "15:30"
             holder.txtTipoPost.text = "Ocorrência"
             holder.txtDescricao.text = post.descricao
-            //holder.txtLocalizacao.text = "Quadra Poliesportiva"
+            holder.txtLocalizacao.text = "Quadra Poliesportiva"
 
         }
        else{
-            holder.txtNome.text = post.informante.nome
-            holder.txtData.text = "23 de Junho"
-            holder.txtHora.text = "15:31"
-            holder.txtTipoPost.text = "Entrada Informada"
-            holder.txtDescricao.text = post.descricao
+            if(post.descricao[3] == 'i') {//testes
+                holder.txtNome.text = post.informante.nome
+                holder.txtData.text = "23 de Junho"
+                holder.txtHora.text = "15:31"
+                holder.txtTipoPost.text = "Entrada Informada"
+                holder.txtDescricao.text = post.descricao
+            }
+            else{
+                holder.txtNome.text = post.informante.nome
+                holder.txtData.text = "23 de Junho"
+                holder.txtHora.text = "15:31"
+                holder.txtTipoPost.text = "Entrada Expirada"
+                holder.txtDescricao.text = post.descricao
+                holder.itemView.icStatus.setImageResource(R.drawable.ic_cancel_black_18dp)
+                holder.itemView.txtTipoPost.setTextColor(R.color.draw_red)
+                holder.itemView.imgLida.setImageResource(R.drawable.ic_remove_red_eye_blue_18dp)
+            }
        }
     }
 

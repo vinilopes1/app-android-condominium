@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var mBodyNotif: TextView
     lateinit var mScreenTitle: TextView
     lateinit var mSearchBar: LinearLayout
-    lateinit var fab: FloatingActionButton
+    lateinit var fab: com.github.clans.fab.FloatingActionMenu
     lateinit var rvAvisos: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,11 +69,11 @@ class MainActivity : AppCompatActivity() {
 
         // The tweet now floating button
 
-        fab = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+        fab = findViewById(R.id.fab1)
+//        fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show()
+//        }
 
         // Logic for the side navigation drawer
 
