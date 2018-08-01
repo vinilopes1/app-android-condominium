@@ -7,6 +7,8 @@
     <color name="colorBlack">#000000</color>
     <color name="colorContent">#EFEEF0</color>
     <color name="colorLine">#dad6d6</color>
+    <color name="fabColor">#02D0FF</color>
+    <color name="greenColor">#4DCE1D</color>
 
     <color name="colorPrimary2">#ffffff</color>
     <color name="colorPrimaryDark2">#e8ebed</color>

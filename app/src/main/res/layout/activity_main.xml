@@ -104,14 +104,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin_vertical"
+        android:layout_marginEnd="@dimen/fab_margin"
         app:menu_icon="@drawable/ic_add_white_24dp"
         app:menu_backgroundColor="@android:color/transparent"
         app:menu_openDirection="up"
         app:menu_showShadow="true"
-        app:menu_colorRipple="@color/colorPrimaryDark"
+        app:menu_colorRipple="@color/fabColor"
         app:menu_colorPressed="@color/colorPrimary"
-        app:menu_colorNormal="@color/colorPrimaryDark">
+        app:menu_colorNormal="@color/fabColor">
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_entrada"
@@ -120,9 +121,9 @@
             app:fab_label="Entrada"
             app:fab_size="mini"
             android:src="@drawable/ic_entrada_white_24dp"
-            app:fab_colorPressed="@color/colorPrimaryDark"
+            app:fab_colorPressed="@color/fabColor"
             app:fab_colorRipple="@color/colorPrimary"
-            app:fab_colorNormal="@color/colorPrimaryDark"/>
+            app:fab_colorNormal="@color/fabColor"/>
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_ocorrencia"
             android:layout_width="wrap_content"
@@ -130,9 +131,9 @@
             app:fab_label="Ocorrência"
             app:fab_size="mini"
             android:src="@drawable/ic_ocorrencia_white_24dp"
-            app:fab_colorPressed="@color/colorPrimaryDark"
+            app:fab_colorPressed="@color/fabColor"
             app:fab_colorRipple="@color/colorPrimary"
-            app:fab_colorNormal="@color/colorPrimaryDark"/>
+            app:fab_colorNormal="@color/fabColor"/>
 
     </com.github.clans.fab.FloatingActionMenu>
 

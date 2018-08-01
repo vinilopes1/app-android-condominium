@@ -1,8 +1,10 @@
 package com.example.vinicius.condominium.app
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.support.annotation.IntegerRes
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
@@ -29,11 +31,13 @@ import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.context.IconicsContextWrapper
 import com.mikepenz.ionicons_typeface_library.Ionicons
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
+import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import retrofit2.Call
@@ -52,6 +56,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var mScreenTitle: TextView
     lateinit var mSearchBar: LinearLayout
     lateinit var fab: com.github.clans.fab.FloatingActionMenu
+    lateinit var rvPosts: RecyclerView
     lateinit var rvAvisos: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,11 +70,11 @@ class MainActivity : AppCompatActivity() {
         mBodyMsg = findViewById(R.id.body_msg)
         mScreenTitle = findViewById(R.id.screen_title)
         mSearchBar = findViewById(R.id.search_bar)
+        rvPosts = findViewById(R.id.rvPosts)
         rvAvisos = findViewById(R.id.rvAvisos)
 
         // The tweet now floating button
-
-        fab = findViewById(R.id.fab1)
+        setupFab()
 //        fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                    .setAction("Action", null).show()
@@ -78,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         // Logic for the side navigation drawer
 
         // The Account Profiles
-        val profile1 = ProfileDrawerItem().withName("Shrey Dabhi").withEmail("@sdabhi23").withIcon(resources.getDrawable(R.drawable.hipolito2))
+        val profile1 = ProfileDrawerItem().withName("Opa").withEmail("@sdabhi23").withIcon(resources.getDrawable(R.drawable.hipolito2))
 
         val headerResult = AccountHeaderBuilder()
                 .withActivity(this)
@@ -109,10 +114,18 @@ class MainActivity : AppCompatActivity() {
                 ).withOnDrawerItemClickListener { view, position, drawerItem -> true }
                 .addStickyDrawerItems(
 
-                        SecondaryDrawerItem().withName("Sair do aplicativo").withIcon(FontAwesome.Icon.faw_qrcode).withIconColorRes(R.color.colorAccent2).withTextColorRes(R.color.colorAccent2)
+                        SecondaryDrawerItem().withIdentifier(8).withName("Sair do aplicativo").withIcon(FontAwesome.Icon.faw_qrcode).withIconColorRes(R.color.colorAccent2)
+                                .withTextColorRes(R.color.colorAccent2)
 
-                )
-                .withSelectedItem(0)
+                ).withOnDrawerItemClickListener{view, position, drawerItem ->
+                    var item = drawerItem.identifier.toInt()
+                    if(drawerItem != null){
+                        if(item == 8){
+                            logout()
+                        }
+                    }
+                    return@withOnDrawerItemClickListener false
+                }
                 .build()
 
         toggleProf.setOnClickListener { view ->
@@ -319,5 +332,28 @@ class MainActivity : AppCompatActivity() {
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(IconicsContextWrapper.wrap(newBase))
     }
+
+    private fun setupFab(){
+
+        fab = findViewById(R.id.fab1)
+        rvPosts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0 && fab.visibility === View.VISIBLE) {
+                    fab1.hideMenu(true)
+                } else if (dy < 0 && fab1.visibility !== View.VISIBLE) {
+                    fab1.showMenu(true)
+                }
+            }
+        })
+    }
+
+    private fun logout() {
+        securityPreferences.limpar()
+        finish()
+        startActivity(Intent(this, LoginActivity::class.java))
+    }
+
+
 
 }

@@ -69,7 +69,7 @@ class PostsRVAdapter2(
 
         if(post.tipo == "ocorrencia"){
             holder.txtNome.text = post.informante.nome
-            holder.txtData.text = "23/Jun/2018"
+            holder.txtData.text = "23 de Junho"
             holder.txtHora.text = "15:30"
             holder.txtTipoPost.text = "Ocorrência"
             holder.txtDescricao.text = post.descricao
@@ -77,24 +77,28 @@ class PostsRVAdapter2(
 
         }
        else{
-            if(post.descricao[3] == 'i') {//testes
-                holder.txtNome.text = post.informante.nome
-                holder.txtData.text = "23 de Junho"
-                holder.txtHora.text = "15:31"
-                holder.txtTipoPost.text = "Entrada Informada"
-                holder.txtDescricao.text = post.descricao
-            }
-            else{
-                holder.txtNome.text = post.informante.nome
-                holder.txtData.text = "23 de Junho"
-                holder.txtHora.text = "15:31"
-                holder.txtTipoPost.text = "Entrada Expirada"
-                holder.txtDescricao.text = post.descricao
-                holder.itemView.icStatus.setImageResource(R.drawable.ic_cancel_black_18dp)
-                holder.itemView.txtTipoPost.setTextColor(R.color.draw_red)
-                holder.itemView.imgLida.setImageResource(R.drawable.ic_remove_red_eye_blue_18dp)
-            }
-       }
-    }
+            holder.txtNome.text = post.informante.nome;
+            holder.txtData.text = "23 de Junho"
+            holder.txtHora.text = "15:31"
+            holder.txtTipoPost.text = post.tipo
+            holder.txtDescricao.text = post.descricao
+//            holder.itemView.setBackgroundResource(R.drawable.ic_check_green_18dp)
+//            holder.txtTipoPost.setTextColor(R.color.greenColor)
 
+//            when(post.tipo){
+//                "Entrada Informada" -> {
+//                                        holder.itemView.setBackgroundResource(R.drawable.ic_check_green_18dp)
+//                                        holder.txtTipoPost.setTextColor(R.color.greenColor)
+//                                        }
+//
+//                "Entrada Expirada" ->{
+//                                        holder.itemView.setBackgroundResource(R.drawable.ic_check_green_18dp)
+//                                        holder.txtTipoPost.setTextColor(R.color.greenColor)
+//                }
+//                else -> null
+//
+//            }
+        }
+
+    }
 }
