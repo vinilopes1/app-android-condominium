@@ -57,8 +57,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" 17 de Junho"
+                    android:layout_gravity="center"
                     android:layout_margin="2.5dp"
-                    android:textSize="15sp"
+                    android:textSize="10sp"
                     android:textColor="@color/draw_description"
                     android:layout_toEndOf="@id/txtNomeUsuario"/>
 
@@ -68,8 +69,9 @@
                     android:layout_height="wrap_content"
                     android:text="-"
                     android:textAlignment="center"
+                    android:layout_gravity="center"
                     android:layout_margin="2.5dp"
-                    android:textSize="15sp"
+                    android:textSize="10sp"
                     android:textColor="@color/draw_description"
                     android:layout_toEndOf="@id/txtData"/>
 
@@ -79,8 +81,9 @@
                     android:layout_height="wrap_content"
                     android:text="15:30"
                     android:textAlignment="center"
+                    android:layout_gravity="center"
                     android:layout_margin="2.5dp"
-                    android:textSize="15sp"
+                    android:textSize="10sp"
                     android:textColor="@color/draw_description"
                     android:layout_toEndOf="@id/dotSep"/>
 

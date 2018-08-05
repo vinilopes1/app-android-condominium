@@ -4,9 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.annotation.IntegerRes
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
@@ -18,12 +15,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.example.vinicius.condominium.R
 import com.example.vinicius.condominium.infra.adapters.AvisoRVAdapter
-import com.example.vinicius.condominium.infra.adapters.PostsRVAdapter2
+import com.example.vinicius.condominium.infra.adapters.PostsRVAdapter
 import com.example.vinicius.condominium.infra.api.APIService
 import com.example.vinicius.condominium.models.Aviso
 import com.example.vinicius.condominium.models.Post
 import com.example.vinicius.condominium.utils.CondomaisConstants
 import com.example.vinicius.condominium.utils.SecurityPreferences
+import com.github.clans.fab.FloatingActionButton
 
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome
@@ -31,15 +29,12 @@ import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.context.IconicsContextWrapper
 import com.mikepenz.ionicons_typeface_library.Ionicons
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
-import com.mikepenz.materialdrawer.Drawer
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -56,6 +51,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var mScreenTitle: TextView
     lateinit var mSearchBar: LinearLayout
     lateinit var fab: com.github.clans.fab.FloatingActionMenu
+    lateinit var fabEntrada: FloatingActionButton
+    lateinit var fabOcorrencia: FloatingActionButton
     lateinit var rvPosts: RecyclerView
     lateinit var rvAvisos: RecyclerView
 
@@ -73,7 +70,6 @@ class MainActivity : AppCompatActivity() {
         rvPosts = findViewById(R.id.rvPosts)
         rvAvisos = findViewById(R.id.rvAvisos)
 
-        // The tweet now floating button
         setupFab()
 //        fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -83,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         // Logic for the side navigation drawer
 
         // The Account Profiles
-        val profile1 = ProfileDrawerItem().withName("Opa").withEmail("@sdabhi23").withIcon(resources.getDrawable(R.drawable.hipolito2))
+        val profile1 = ProfileDrawerItem().withName("Hipólito Júnior").withEmail("@HipolitoJr").withIcon(resources.getDrawable(R.drawable.hipolito2))
 
         val headerResult = AccountHeaderBuilder()
                 .withActivity(this)
@@ -103,10 +99,10 @@ class MainActivity : AppCompatActivity() {
                 .withActionBarDrawerToggle(false)
                 .addDrawerItems(
 
-                        PrimaryDrawerItem().withIdentifier(2).withName("Agendamentos").withIcon(FontAwesome.Icon.faw_user_o).withSelectable(false),
+                        PrimaryDrawerItem().withIdentifier(2).withName("Visitantes").withIcon(FontAwesome.Icon.faw_user_o).withSelectable(false),
                         PrimaryDrawerItem().withIdentifier(3).withName("Reservas").withIcon(FontAwesome.Icon.faw_list_alt).withSelectable(false),
-                        PrimaryDrawerItem().withIdentifier(4).withName("Entregas e Encomendas").withIcon(FontAwesome.Icon.faw_bolt).withSelectable(false),
-                        PrimaryDrawerItem().withIdentifier(5).withName("Visitantes").withIcon(FontAwesome.Icon.faw_clone).withSelectable(false),
+                        PrimaryDrawerItem().withIdentifier(4).withName("Mural").withIcon(FontAwesome.Icon.faw_bolt).withSelectable(false),
+                        PrimaryDrawerItem().withIdentifier(5).withName("Enquetes").withIcon(FontAwesome.Icon.faw_clone).withSelectable(false),
                         DividerDrawerItem(),
                         PrimaryDrawerItem().withIdentifier(6).withName("Status e Privacidade").withSelectable(false),
                         PrimaryDrawerItem().withIdentifier(7).withName("Ajuda").withSelectable(false)
@@ -144,15 +140,15 @@ class MainActivity : AppCompatActivity() {
 
         // Logic for the navigation tabs
 
-        val home = tabs.newTab().setIcon(IconicsDrawable(this).icon(FontAwesome.Icon.faw_home).colorRes(R.color.colorAccent2))
-        val notif = tabs.newTab().setIcon(IconicsDrawable(this).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
-        val search = tabs.newTab().setIcon(IconicsDrawable(this).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.draw_description))
-        val msg = tabs.newTab().setIcon(IconicsDrawable(this).icon(FontAwesome.Icon.faw_envelope_o).colorRes(R.color.draw_description))
+        val posts = tabs.newTab().setIcon(IconicsDrawable(this).icon(FontAwesome.Icon.faw_home).colorRes(R.color.colorAccent2))
+        val avisos = tabs.newTab().setIcon(IconicsDrawable(this).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
+        val pesquisar = tabs.newTab().setIcon(IconicsDrawable(this).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.draw_description))
+        val encomendas = tabs.newTab().setIcon(IconicsDrawable(this).icon(FontAwesome.Icon.faw_envelope_o).colorRes(R.color.draw_description))
 
-        tabs.addTab(home)
-        tabs.addTab(notif)
-        tabs.addTab(search)
-        tabs.addTab(msg)
+        tabs.addTab(posts)
+        tabs.addTab(avisos)
+        tabs.addTab(pesquisar)
+        tabs.addTab(encomendas)
 
 
         // Tabs
@@ -169,10 +165,10 @@ class MainActivity : AppCompatActivity() {
                     mSwipeRefresh.visibility = View.VISIBLE
                     mBodyMsg.visibility = View.INVISIBLE
 
-                    home.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.colorAccent2))
-                    notif.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
-                    search.setIcon(IconicsDrawable(applicationContext).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.draw_description))
-                    msg.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_envelope_o).colorRes(R.color.draw_description))
+                    posts.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.colorAccent2))
+                    avisos.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
+                    pesquisar.setIcon(IconicsDrawable(applicationContext).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.draw_description))
+                    encomendas.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_envelope_o).colorRes(R.color.draw_description))
 
                     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(mSearchBar.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
@@ -188,10 +184,10 @@ class MainActivity : AppCompatActivity() {
                     mSearchBar.visibility = View.GONE
                     rvAvisos.visibility = View.VISIBLE
 
-                    home.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.draw_description))
-                    notif.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell).colorRes(R.color.colorAccent2))
-                    search.setIcon(IconicsDrawable(applicationContext).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.draw_description))
-                    msg.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_envelope_o).colorRes(R.color.draw_description))
+                    posts.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.draw_description))
+                    avisos.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell).colorRes(R.color.colorAccent2))
+                    pesquisar.setIcon(IconicsDrawable(applicationContext).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.draw_description))
+                    encomendas.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_envelope_o).colorRes(R.color.draw_description))
 
                     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(mSearchBar.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
@@ -206,10 +202,10 @@ class MainActivity : AppCompatActivity() {
                     mSearchBar.visibility = View.VISIBLE
                     rvAvisos.visibility = View.INVISIBLE
 
-                    home.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.draw_description))
-                    notif.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
-                    search.setIcon(IconicsDrawable(applicationContext).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.colorAccent2))
-                    msg.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_envelope_o).colorRes(R.color.draw_description))
+                    posts.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.draw_description))
+                    avisos.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
+                    pesquisar.setIcon(IconicsDrawable(applicationContext).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.colorAccent2))
+                    encomendas.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_envelope_o).colorRes(R.color.draw_description))
 
                 } else if (tabs.getSelectedTabPosition() == 3) {
 
@@ -222,10 +218,10 @@ class MainActivity : AppCompatActivity() {
                     mSearchBar.visibility = View.GONE
                     rvAvisos.visibility = View.INVISIBLE
 
-                    home.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.draw_description))
-                    notif.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
-                    search.setIcon(IconicsDrawable(applicationContext).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.draw_description))
-                    msg.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_envelope).colorRes(R.color.colorAccent2))
+                    posts.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_home).colorRes(R.color.draw_description))
+                    avisos.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_bell_o).colorRes(R.color.draw_description))
+                    pesquisar.setIcon(IconicsDrawable(applicationContext).icon(Ionicons.Icon.ion_ios_search).colorRes(R.color.draw_description))
+                    encomendas.setIcon(IconicsDrawable(applicationContext).icon(FontAwesome.Icon.faw_envelope).colorRes(R.color.colorAccent2))
 
                     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(mSearchBar.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
@@ -247,13 +243,16 @@ class MainActivity : AppCompatActivity() {
 
         mSwipeRefresh.setColorSchemeResources(R.color.colorAccent2)
 
-        mSwipeRefresh.setOnRefreshListener { Handler().postDelayed({ mSwipeRefresh.isRefreshing = false }, 5000) }
+        mSwipeRefresh.setOnRefreshListener { Handler().postDelayed({
+            mSwipeRefresh.isRefreshing = false
+            getPosts()
+        }, 1000) }
 
 
     }
 
     fun exibirListaPost(posts: MutableList<Post>){
-        val adapter = PostsRVAdapter2(this@MainActivity, this!!.applicationContext, posts!!)
+        val adapter = PostsRVAdapter(this@MainActivity, this!!.applicationContext, posts!!)
 
         rvPosts.adapter = adapter
 
@@ -336,6 +335,9 @@ class MainActivity : AppCompatActivity() {
     private fun setupFab(){
 
         fab = findViewById(R.id.fab1)
+        fabEntrada = findViewById(R.id.fab_entrada)
+        fabOcorrencia = findViewById(R.id.fab_ocorrencia)
+
         rvPosts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -346,6 +348,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
+        fabEntrada.setOnClickListener { view ->
+            val intent = Intent(this, AddEntradaActivity::class.java)
+            startActivity(intent)
+        }
+
+        fabOcorrencia.setOnClickListener { view ->
+            val intent = Intent(this, AddOcorrenciaActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun logout() {

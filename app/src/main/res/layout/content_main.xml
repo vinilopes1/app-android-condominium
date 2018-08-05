@@ -33,7 +33,7 @@
         android:id="@+id/body_msg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/tab_msg"
+        android:text="Entregas"
         android:gravity="center"
         android:textSize="35sp"
         android:textStyle="bold"

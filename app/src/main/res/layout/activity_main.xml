@@ -16,7 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:layout_collapseMode="pin"
+            app:layout_scrollFlags="enterAlways|scroll">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -104,8 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/fab_margin_vertical"
-        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_margin="@dimen/fab_margin"
         app:menu_icon="@drawable/ic_add_white_24dp"
         app:menu_backgroundColor="@android:color/transparent"
         app:menu_openDirection="up"
