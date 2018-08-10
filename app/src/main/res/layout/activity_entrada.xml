@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,41 +12,44 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarEntrada"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:layout_collapseMode="pin"
-        android:theme="@style/ToolbarColorBack"
-        app:layout_scrollFlags="enterAlways|scroll">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="2dp">
-
-            <RelativeLayout
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarEntrada"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical|left">
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/ToolbarColorBack"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="enterAlways|scroll"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
 
-                <TextView
-                    android:id="@+id/screen_title"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Entrada"
-                    android:textColor="#282828"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:gravity="center_vertical"
+                    android:padding="2dp">
 
-            </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|left">
 
-        </LinearLayout>
+                        <TextView
+                            android:id="@+id/screen_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Entrada"
+                            android:textColor="#282828"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
 
 
-    </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_entrada" />
 
 </android.support.design.widget.CoordinatorLayout>

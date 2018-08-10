@@ -3,12 +3,15 @@ package com.example.vinicius.condominium.infra.adapters
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.vinicius.condominium.R
+import com.example.vinicius.condominium.app.EntradaActivity
 import com.example.vinicius.condominium.models.Post
 
 class PostsRVAdapter(
@@ -29,9 +32,7 @@ class PostsRVAdapter(
         lateinit var txtLocalizacao: TextView
         //lateinit var imgOcorrencia: ImageView
 
-
         init{
-
 
             txtNome = itemView!!.findViewById(R.id.txtNomeUsuario)
             txtData = itemView!!.findViewById(R.id.txtData)
@@ -66,23 +67,19 @@ class PostsRVAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var post = posts.get(position)
 
-        if(post.tipo == "ocorrencia"){
-            holder.txtNome.text = post.informante.nome
-            holder.txtData.text = "23 de Junho"
-            holder.txtHora.text = "15:30"
-            holder.txtTipoPost.text = "Ocorrência"
-            holder.txtDescricao.text = post.descricao
-            holder.txtLocalizacao.text = "Quadra Poliesportiva"
-
+        holder.itemView.setOnClickListener { view ->
+            onClick(post, view);
         }
-       else{
-            holder.txtNome.text = post.informante.nome;
-            holder.txtData.text = "23 de Junho"
-            holder.txtHora.text = "15:31"
-            holder.txtTipoPost.text = "Entrada Informada"
-            holder.txtDescricao.text = post.descricao
-//            holder.itemView.setBackgroundResource(R.drawable.ic_check_green_18dp)
-//            holder.txtTipoPost.setTextColor(R.color.greenColor)
+
+        holder.txtNome.text = post.informante.nome
+        holder.txtData.text = post.data
+        holder.txtHora.text = post.hora
+        holder.txtTipoPost.text = post.status
+        holder.txtDescricao.text = post.descricao
+
+        if(post.tipo == "ocorrencia"){
+            holder.txtLocalizacao.text = "Quadra Poliesportiva"
+        }else{
 
 //            when(post.tipo){
 //                "Entrada Informada" -> {
@@ -99,5 +96,13 @@ class PostsRVAdapter(
 //            }
         }
 
+    }
+
+    private fun onClick(post: Post, view: View?) {
+        if (post.tipo == "entrada") {
+            val intent = Intent(activity, EntradaActivity::class.java)
+            activity.startActivityForResult(intent, 0)
+            activity.overridePendingTransition(R.anim.lefttoright, R.anim.stable)
+        }
     }
 }

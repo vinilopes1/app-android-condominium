@@ -367,21 +367,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openFragment(){
-
         val intent = Intent(this,EntradaActivity::class.java)
         startActivityForResult(intent,0)
         this@MainActivity.overridePendingTransition(R.anim.lefttoright,R.anim.stable)
-
-//        Intent intent=new Intent(Activity1.this,Activity2.class);
-//        startActivityForResult(intent,0);
-//        getActivity().overridePendingTransition( R.anim.lefttoright, R.anim.stable )
-
-
-//        val fm = supportFragmentManager
-//// Abre uma transação e adiciona
-//        val ft = fm.beginTransaction()
-//        ft.add(R.id.fragment_container, EntradaFragment())
-//        ft.commit()
     }
 
 
