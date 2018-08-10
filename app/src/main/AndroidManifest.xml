@@ -20,20 +20,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".app.AddEntradaActivity"
-            android:parentActivityName=".app.MainActivity"
             android:label="Adicionar entrada"
+            android:parentActivityName=".app.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".app.AddOcorrenciaActivity"
-            android:parentActivityName=".app.MainActivity"
             android:label="Adicionar ocorrência"
+            android:parentActivityName=".app.MainActivity"
             android:theme="@style/AppTheme" />
-
-        <activity android:name=".app.MainActivity">
-        </activity>
+        <activity android:name=".app.MainActivity"></activity>
+        <activity android:name=".app.EntradaActivity" android:parentActivityName=".app.MainActivity"></activity>
     </application>
 
 </manifest>

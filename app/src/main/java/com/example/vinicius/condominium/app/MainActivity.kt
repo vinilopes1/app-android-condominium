@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var toggleProf: ImageView
     lateinit var mSwipeRefresh: SwipeRefreshLayout
     lateinit var mBodyMsg: TextView
-    lateinit var mBodyNotif: TextView
     lateinit var mScreenTitle: TextView
     lateinit var mSearchBar: LinearLayout
     lateinit var fab: com.github.clans.fab.FloatingActionMenu
@@ -350,8 +349,9 @@ class MainActivity : AppCompatActivity() {
         })
 
         fabEntrada.setOnClickListener { view ->
-            val intent = Intent(this, AddEntradaActivity::class.java)
-            startActivity(intent)
+            openFragment()
+//            val intent = Intent(this, AddEntradaActivity::class.java)
+//            startActivity(intent)
         }
 
         fabOcorrencia.setOnClickListener { view ->
@@ -366,6 +366,23 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, LoginActivity::class.java))
     }
 
+    private fun openFragment(){
+
+        val intent = Intent(this,EntradaActivity::class.java)
+        startActivityForResult(intent,0)
+        this@MainActivity.overridePendingTransition(R.anim.lefttoright,R.anim.stable)
+
+//        Intent intent=new Intent(Activity1.this,Activity2.class);
+//        startActivityForResult(intent,0);
+//        getActivity().overridePendingTransition( R.anim.lefttoright, R.anim.stable )
+
+
+//        val fm = supportFragmentManager
+//// Abre uma transação e adiciona
+//        val ft = fm.beginTransaction()
+//        ft.add(R.id.fragment_container, EntradaFragment())
+//        ft.commit()
+    }
 
 
 }

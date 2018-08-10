@@ -47,29 +47,36 @@
         android:elevation="5dp" >
 
         <ImageView
-            android:id="@+id/allBtn"
-            android:layout_width="25dp"
+            android:id="@+id/btnTodos"
+            android:layout_width="63dp"
             android:layout_height="match_parent"
-            android:src="@drawable/all"
+            android:src="@drawable/todos2"
             android:scaleType="fitCenter"
-            android:layout_marginStart="15dp"
             android:layout_alignParentStart="true" />
 
         <ImageView
+            android:id="@+id/btnEntradas"
             android:layout_width="63dp"
             android:layout_height="match_parent"
-            android:src="@drawable/mentions"
+            android:src="@drawable/entradas"
             android:scaleType="fitCenter"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@id/allBtn" />
+            android:layout_toEndOf="@id/btnTodos" />
 
         <ImageView
-            android:layout_width="28dp"
+            android:id="@+id/btnOcorrencias"
+            android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:src="@drawable/settings"
+            android:src="@drawable/ocorrencias2"
             android:scaleType="fitCenter"
-            android:layout_marginEnd="10dp"
-            android:layout_alignParentEnd="true" />
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/btnEntradas" />
+        <!--<ImageView-->
+            <!--android:layout_width="28dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:src="@drawable/settings"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:layout_alignParentEnd="true" />-->
 
     </RelativeLayout>
 

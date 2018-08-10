@@ -113,41 +113,41 @@
                     android:textSize="@dimen/custom_drawer_account_header_text"
                     android:textColor="@color/draw_head"
                     android:textStyle="bold"
-                    android:text="125"/>
+                    android:text="Hipólito Ribeiro Cavalcante Jr"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/txt_margin"
-                    android:fontFamily="sans-serif"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:textSize="@dimen/custom_drawer_account_header_text"
-                    android:textColor="@color/draw_description"
-                    android:text="Following"/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/txt_margin"-->
+                    <!--android:fontFamily="sans-serif"-->
+                    <!--android:lines="1"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:textSize="@dimen/custom_drawer_account_header_text"-->
+                    <!--android:textColor="@color/draw_description"-->
+                    <!--android:text="Following"/>-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/material_drawer_vertical_padding"
-                    android:fontFamily="sans-serif"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:textSize="@dimen/custom_drawer_account_header_text"
-                    android:textColor="@color/draw_head"
-                    android:textStyle="bold"
-                    android:text="44"/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/material_drawer_vertical_padding"-->
+                    <!--android:fontFamily="sans-serif"-->
+                    <!--android:lines="1"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:textSize="@dimen/custom_drawer_account_header_text"-->
+                    <!--android:textColor="@color/draw_head"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:text="44"/>-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/txt_margin"
-                    android:fontFamily="sans-serif"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:textSize="@dimen/custom_drawer_account_header_text"
-                    android:textColor="@color/draw_description"
-                    android:text="Followers"/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/txt_margin"-->
+                    <!--android:fontFamily="sans-serif"-->
+                    <!--android:lines="1"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:textSize="@dimen/custom_drawer_account_header_text"-->
+                    <!--android:textColor="@color/draw_description"-->
+                    <!--android:text="Followers"/>-->
 
             </LinearLayout>
 
