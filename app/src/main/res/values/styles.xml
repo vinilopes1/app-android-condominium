@@ -64,5 +64,9 @@
         <item name="material_drawer_header_selection_text">@color/material_drawer_header_selection_text</item>
     </style>
 
+    <style name="ToolbarColorBack" parent="AppTheme">
+        <item name="android:textColorSecondary">#000000</item>
+    </style>
+
 
 </resources>

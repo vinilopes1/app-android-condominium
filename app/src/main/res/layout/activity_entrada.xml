@@ -15,9 +15,9 @@
         android:id="@+id/toolbarEntrada"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:layout_collapseMode="pin"
+        android:theme="@style/ToolbarColorBack"
         app:layout_scrollFlags="enterAlways|scroll">
 
         <LinearLayout

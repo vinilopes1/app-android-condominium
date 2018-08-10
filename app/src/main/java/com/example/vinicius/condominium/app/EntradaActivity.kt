@@ -21,7 +21,6 @@ class EntradaActivity : AppCompatActivity() {
         setupToolbar()
     }
 
-    @SuppressLint("ResourceAsColor")
     private fun setupToolbar(){
         toolbar = findViewById(R.id.toolbarEntrada)
         setSupportActionBar(toolbar)
