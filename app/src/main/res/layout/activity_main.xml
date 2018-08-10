@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.vinicius.condominium.app.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:layout_collapseMode="pin"
+            app:layout_scrollFlags="enterAlways|scroll">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="2dp">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/togglePic"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/hipolito2"
+                    app:riv_border_color="#333333"
+                    app:riv_border_width="0.1dp"
+                    app:riv_corner_radius="20dp"
+                    app:riv_oval="true" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|left">
+
+                    <TextView
+                        android:id="@+id/screen_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Home"
+                        android:textColor="#282828"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:id="@+id/search_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="1"
+                        android:visibility="gone">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:hint="Buscar em seu condomínio"
+                            android:textColor="@color/draw_description"
+                            android:textColorHint="@color/draw_description"
+                            android:gravity="center_vertical|left"
+                            android:background="@drawable/round_bg"
+                            android:focusedByDefault="true"
+                            android:inputType="text"
+                            android:imeOptions="actionSearch"
+                            android:paddingLeft="20dp"
+                            android:textSize="15dp"
+                            android:layout_weight="0.9"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="{typ-user-add-outline}"
+                            android:gravity="center"
+                            android:textSize="30sp"
+                            android:layout_weight="0.1"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabMode="fixed" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_main" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:menu_icon="@drawable/ic_add_white_24dp"
+        app:menu_backgroundColor="@android:color/transparent"
+        app:menu_openDirection="up"
+        app:menu_showShadow="true"
+        app:menu_colorRipple="@color/fabColor"
+        app:menu_colorPressed="@color/colorPrimary"
+        app:menu_colorNormal="@color/fabColor">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_entrada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Entrada"
+            app:fab_size="mini"
+            android:src="@drawable/ic_entrada_white_24dp"
+            app:fab_colorPressed="@color/fabColor"
+            app:fab_colorRipple="@color/colorPrimary"
+            app:fab_colorNormal="@color/fabColor"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_ocorrencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Ocorrência"
+            app:fab_size="mini"
+            android:src="@drawable/ic_ocorrencia_white_24dp"
+            app:fab_colorPressed="@color/fabColor"
+            app:fab_colorRipple="@color/colorPrimary"
+            app:fab_colorNormal="@color/fabColor"/>
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</android.support.design.widget.CoordinatorLayout>

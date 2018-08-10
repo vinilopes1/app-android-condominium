@@ -1,44 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:clickable="true"
+    android:background="@color/colorPrimary2"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:padding="8dp"
-            android:src="@drawable/ic_notifications_black_24dp"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="60dp" />
+        android:layout_height="150dp"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="5">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/whatshot"
+                    app:riv_corner_radius="25dp"
+                    app:riv_oval="true"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"/>
 
-            <TextView
-                android:id="@+id/txtDescricaoAviso"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="18sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/txtInformanteAviso"
-                android:textSize="14sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                    <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/profImg"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="bottom"
+                            android:src="@drawable/vinicius"
+                            app:riv_corner_radius="25dp"
+                            app:riv_oval="true"
+                        android:layout_weight="1"/>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"/>
+                        <TextView
+                            android:id="@+id/dropDown"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:text="{ion_chevron_down}"
+                            android:textAlignment="textEnd"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="10dp"
+                            android:textSize="15sp"
+                            android:textColor="@color/draw_description"
+                            android:layout_alignParentEnd="true"
+                            android:layout_weight="2"
+                            />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:weightSum="2">
+                        <TextView
+                            android:id="@+id/txtNomeInformante"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Vinícius Lopes"
+                            android:textStyle="bold"
+                            android:textColor="@color/draw_head"
+                            android:layout_marginEnd="4dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="informa ao condomínio"/>
+                    </LinearLayout>
+
+                     <TextView
+                         android:id="@+id/txtDescricaoAviso"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="3"
+                         android:layout_marginEnd="2dp"
+                         android:text="No dia 23/08/2018, faltará energia nas torres A e B devido a manuntenção preventiva do circuito elétrico."
+                         android:ellipsize="end"
+                         android:minLines="3"
+                         android:maxLines="3"
+                         android:scrollHorizontally="true"
+                         />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/colorSecondary"/>
 
 </LinearLayout>

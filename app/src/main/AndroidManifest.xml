@@ -21,25 +21,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".app.HomeActivity"
-            android:label="Timeline"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity
             android:name=".app.AddEntradaActivity"
-            android:parentActivityName=".app.HomeActivity"
+            android:label="Adicionar entrada"
+            android:parentActivityName=".app.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".app.AddOcorrenciaActivity"
-            android:parentActivityName=".app.HomeActivity"
-            android:theme="@style/AppTheme"
-            ></activity>
+        <activity
+            android:name=".app.AddOcorrenciaActivity"
+            android:label="Adicionar ocorrência"
+            android:parentActivityName=".app.MainActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".app.MainActivity"></activity>
+        <activity android:name=".app.EntradaActivity" android:parentActivityName=".app.MainActivity"></activity>
     </application>
 
 </manifest>

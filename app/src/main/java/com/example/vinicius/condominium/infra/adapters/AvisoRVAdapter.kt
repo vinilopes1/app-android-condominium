@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.vinicius.condominium.R
 import com.example.vinicius.condominium.models.Aviso
+import java.nio.file.Files.size
 
 class AvisoRVAdapter(
         var activity: Activity,
@@ -24,7 +25,7 @@ class AvisoRVAdapter(
 
         init {
             txtDescricao = itemView!!.findViewById(R.id.txtDescricaoAviso)
-            txtInformante = itemView!!.findViewById(R.id.txtInformanteAviso)
+            txtInformante = itemView!!.findViewById(R.id.txtNomeInformante)
         }
 
     }
@@ -46,7 +47,12 @@ class AvisoRVAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         var aviso = avisos.get(position)
-
+//        var subtext = ""
+//
+//        while (i in 0..105)
+//            subtext =  subtext+ aviso.descricao[i]
+//        if(subtext.length > 105)
+//            subtext = subtext+" ..."
         holder.txtDescricao.text = aviso.descricao
         holder.txtInformante.text = aviso.informante.nome
 

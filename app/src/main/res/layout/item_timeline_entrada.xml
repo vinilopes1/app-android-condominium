@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary2"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/profImg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/hipolito2"
+        app:riv_corner_radius="25dp"
+        app:riv_oval="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/txtNomeUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vinícius"
+                android:textColor="@color/draw_head"
+                android:textStyle="bold"
+                android:layout_margin="2.5dp"
+                android:textSize="15sp"
+                android:layout_alignParentStart="true"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_marginEnd="10dp">
+
+                <TextView
+                    android:id="@+id/txtData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 17 de Junho"
+                    android:layout_gravity="center"
+                    android:layout_margin="2.5dp"
+                    android:textSize="10sp"
+                    android:textColor="@color/draw_description"
+                    android:layout_toEndOf="@id/txtNomeUsuario"/>
+
+                <TextView
+                    android:id="@+id/dotSep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:layout_margin="2.5dp"
+                    android:textSize="10sp"
+                    android:textColor="@color/draw_description"
+                    android:layout_toEndOf="@id/txtData"/>
+
+                <TextView
+                    android:id="@+id/txtHora"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15:30"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:layout_margin="2.5dp"
+                    android:textSize="10sp"
+                    android:textColor="@color/draw_description"
+                    android:layout_toEndOf="@id/dotSep"/>
+
+            </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/dotSep2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="•"-->
+                <!--android:textAlignment="center"-->
+                <!--android:layout_margin="2.5dp"-->
+                <!--android:textSize="15sp"-->
+                <!--android:textColor="@color/draw_description"-->
+                <!--android:layout_toEndOf="@id/txtHora"/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/txtTipoPost"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Entrada"-->
+                <!--android:layout_margin="2.5dp"-->
+                <!--android:textSize="15sp"-->
+                <!--android:textColor="@color/draw_description"-->
+                <!--android:layout_toEndOf="@id/dotSep2"/>-->
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txtDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="2.5dp"
+            android:textColor="@color/draw_head"
+            android:text="Maria vai entrar as 15 horas."
+            android:layout_marginEnd="10dp"
+            android:textSize="15sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:layout_weight="10">
+            <ImageView
+                android:id="@+id/imgLida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_remove_red_eye_black_18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="2dp"/>
+
+                <TextView
+                    android:id="@+id/txtLocalizacao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"/>
+
+
+                <ImageView
+                    android:id="@+id/icStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_check_green_18dp"
+                    android:layout_marginTop="5dp"
+                    android:textAlignment="textEnd"/>
+
+                <TextView
+                    android:id="@+id/txtTipoPost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textEnd"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#009933"
+                    android:text="Entrada Informada"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="10sp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0.2dp"
+    android:background="@color/colorSecondary"/>
+
+</LinearLayout>
