@@ -4,12 +4,14 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import android.widget.Toast
 import com.example.vinicius.condominium.R
 import com.example.vinicius.condominium.infra.adapters.VisitantesRVAdapater
 import com.example.vinicius.condominium.infra.api.APIService
 import com.example.vinicius.condominium.models.Visitante
 import com.example.vinicius.condominium.utils.CondomaisConstants
+import com.example.vinicius.condominium.utils.MethodsUtils
 import com.example.vinicius.condominium.utils.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_visitantes.*
 import kotlinx.android.synthetic.main.content_visitante.*
@@ -19,7 +21,7 @@ import retrofit2.Response
 
 class VisitantesActivity : AppCompatActivity() {
 
-    lateinit var toolbar: android.support.v7.widget.Toolbar
+    lateinit var toolbar: Toolbar
 
     lateinit private var apiService: APIService
     lateinit private var securityPreferences: SecurityPreferences
@@ -32,7 +34,7 @@ class VisitantesActivity : AppCompatActivity() {
 
     private fun initComponents() {
         securityPreferences = SecurityPreferences(this)
-        apiService = APIService(securityPreferences.getSavedString(CondomaisConstants.KEY.TOKEN_LOGADO))
+        apiService = APIService(MethodsUtils().withContext(this).getToken())
         setupToolbar()
 
         getVisitantes()
