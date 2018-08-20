@@ -30,8 +30,12 @@
             android:label="Adicionar ocorrência"
             android:parentActivityName=".app.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".app.MainActivity"></activity>
-        <activity android:name=".app.EntradaActivity" android:parentActivityName=".app.MainActivity"></activity>
+        <activity android:name=".app.MainActivity" />
+        <activity
+            android:name=".app.EntradaActivity"
+            android:parentActivityName=".app.MainActivity" />
+        <activity android:name=".app.VisitantesActivity"
+            android:parentActivityName=".app.VisitantesActivity"></activity>
     </application>
 
 </manifest>
