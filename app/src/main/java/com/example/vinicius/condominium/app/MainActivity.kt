@@ -118,6 +118,9 @@ class MainActivity : AppCompatActivity() {
                         if(item == 8){
                             logout()
                         }
+                        if(item == 2){
+                            startActivity(Intent(this@MainActivity, VisitantesActivity::class.java))
+                        }
                     }
                     return@withOnDrawerItemClickListener false
                 }
