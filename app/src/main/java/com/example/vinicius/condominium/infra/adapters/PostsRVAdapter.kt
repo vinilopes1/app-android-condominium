@@ -86,18 +86,22 @@ class PostsRVAdapter(
 
         if(post.tipo == "ocorrencia"){
             holder.txtLocalizacao.text = "Quadra Poliesportiva"
-            Picasso.get()
-                    .load(post.foto)
-                    .into(holder.itemView.imgOcorrencia)
+
+            if (!post.foto.isNullOrBlank()){
+                Picasso.get()
+                        .load(post.foto)
+                        .error(R.drawable.ic_alarm_yellow_48dp)
+                        .into(holder.itemView.imgOcorrencia)
+            }
         }else{
             when(post.status){ //Informada, Lida, Atendida, Cancelada or Expirada
                 "Entrada informada" -> {
-                    holder.itemView.icStatus.setImageResource(R.drawable.ic_check_green_18dp)
+                    //holder.itemView.icStatus.setImageResource(R.drawable.ic_check_green_18dp)
                     holder.txtTipoPost.setTextColor(Color.parseColor("#23CC23"))
                 }
 
                 "Entrada cancelada" ->{
-                    holder.itemView.icStatus.setImageResource(R.drawable.ic_cancel_black_18dp)
+                    //holder.itemView.icStatus.setImageResource(R.drawable.ic_cancel_black_18dp)
                     holder.txtTipoPost.setTextColor(activity.resources.getColor(R.color.draw_red))
                 }
 
