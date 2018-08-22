@@ -3,6 +3,7 @@
     package="com.example.vinicius.condominium">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.permission.CAMERA" android:required="true"/>
 
     <application
         android:allowBackup="true"
