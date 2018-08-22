@@ -3,7 +3,10 @@
     package="com.example.vinicius.condominium">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.permission.CAMERA" android:required="true"/>
+
+    <uses-feature
+        android:name="android.permission.CAMERA"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -29,13 +32,16 @@
         <activity
             android:name=".app.AddOcorrenciaActivity"
             android:label="Adicionar ocorrência"
-            android:parentActivityName=".app.MainActivity"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".app.MainActivity" />
+            android:parentActivityName=".app.MainActivity" />
+        <activity
+            android:name=".app.MainActivity" />
         <activity
             android:name=".app.EntradaActivity"
             android:parentActivityName=".app.MainActivity" />
-        <activity android:name=".app.VisitantesActivity"
+        <activity
+            android:name=".app.VisitantesActivity" />
+        <activity
+            android:name=".app.AddVisitanteActivity"
             android:parentActivityName=".app.VisitantesActivity"></activity>
     </application>
 
