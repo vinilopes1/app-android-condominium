@@ -31,6 +31,7 @@ dependencies {
     implementation 'com.mikepenz:fontawesome-typeface:4.7.0.2@aar'
     implementation 'com.mikepenz:ionicons-typeface:2.0.1.4@aar'
     implementation 'com.mikepenz:typeicons-typeface:2.0.7.4@aar'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
