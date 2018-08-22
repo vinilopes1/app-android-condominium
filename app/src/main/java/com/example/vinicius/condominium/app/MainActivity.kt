@@ -248,6 +248,7 @@ class MainActivity : AppCompatActivity() {
         mSwipeRefresh.setOnRefreshListener { Handler().postDelayed({
             mSwipeRefresh.isRefreshing = false
             getPosts()
+            getAvisos()
         }, 1000) }
 
 
