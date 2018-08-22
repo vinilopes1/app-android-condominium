@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.AddOcorrenciaActivity">
+    tools:context=".app.AddVisitanteActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarAddOcorrencia"
+            android:id="@+id/toolbarAddVisitante"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/ToolbarColorBack"
@@ -36,7 +36,7 @@
                         android:id="@+id/screen_title_add_visitante"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Adicionar Ocorrência"
+                        android:text="Adicionar Visitante"
                         android:textColor="#282828"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
@@ -49,6 +49,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_add_ocorrencia"/>
+    <include layout="@layout/content_add_visitante"/>
 
 </android.support.design.widget.CoordinatorLayout>
