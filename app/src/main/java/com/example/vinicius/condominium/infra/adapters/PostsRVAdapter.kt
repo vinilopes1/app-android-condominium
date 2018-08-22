@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.support.v4.app.ActivityCompat.startActivityForResult
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -13,6 +14,10 @@ import android.widget.TextView
 import com.example.vinicius.condominium.R
 import com.example.vinicius.condominium.app.EntradaActivity
 import com.example.vinicius.condominium.models.Post
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_add_ocorrencia.view.*
+import kotlinx.android.synthetic.main.item_timeline_entrada.view.*
+import kotlinx.android.synthetic.main.item_timeline_ocorrencia.view.*
 
 class PostsRVAdapter(
         var activity: Activity,
@@ -50,9 +55,11 @@ class PostsRVAdapter(
         var inflater = LayoutInflater.from(context)
         lateinit var view: View
 
-        if (posts.get(cont).tipo == "ocorrencia") {
+        if (posts.get(cont).tipo == "ocorrencia")
             view = inflater.inflate(R.layout.item_timeline_ocorrencia, parent, false)
-        } else view = inflater.inflate(R.layout.item_timeline_entrada, parent, false)
+        else
+            view = inflater.inflate(R.layout.item_timeline_entrada, parent, false)
+
         cont++
 
         var viewHolder = ViewHolder(view)
@@ -68,7 +75,7 @@ class PostsRVAdapter(
         var post = posts.get(position)
 
         holder.itemView.setOnClickListener { view ->
-            onClick(post, view);
+            onClick(post, view)
         }
 
         holder.txtNome.text = post.informante.nome
@@ -79,21 +86,23 @@ class PostsRVAdapter(
 
         if(post.tipo == "ocorrencia"){
             holder.txtLocalizacao.text = "Quadra Poliesportiva"
+            Picasso.get()
+                    .load(post.foto)
+                    .into(holder.itemView.imgOcorrencia)
         }else{
+            when(post.status){ //Informada, Lida, Atendida, Cancelada or Expirada
+                "Entrada informada" -> {
+                    holder.itemView.icStatus.setImageResource(R.drawable.ic_check_green_18dp)
+                    holder.txtTipoPost.setTextColor(Color.parseColor("#23CC23"))
+                }
 
-//            when(post.tipo){
-//                "Entrada Informada" -> {
-//                                        holder.itemView.setBackgroundResource(R.drawable.ic_check_green_18dp)
-//                                        holder.txtTipoPost.setTextColor(R.color.greenColor)
-//                                        }
-//
-//                "Entrada Expirada" ->{
-//                                        holder.itemView.setBackgroundResource(R.drawable.ic_check_green_18dp)
-//                                        holder.txtTipoPost.setTextColor(R.color.greenColor)
-//                }
-//                else -> null
-//
-//            }
+                "Entrada cancelada" ->{
+                    holder.itemView.icStatus.setImageResource(R.drawable.ic_cancel_black_18dp)
+                    holder.txtTipoPost.setTextColor(activity.resources.getColor(R.color.draw_red))
+                }
+
+                else -> null
+            }
         }
 
     }

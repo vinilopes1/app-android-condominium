@@ -9,16 +9,29 @@
     android:theme="@style/AppTheme"
     tools:context=".app.AddOcorrenciaActivity">
 
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/btnAddFotoOcorrencia"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:src="@drawable/ic_assignment_512"
+            android:id="@+id/imgFotoOcorrencia"
+            android:src="@drawable/camera"
+            android:background="@android:color/holo_blue_dark"
             android:layout_width="match_parent"
             android:layout_height="260dp" />
 
-    </LinearLayout>
+        <ImageButton
+            android:background="@android:color/holo_blue_dark"
+            android:src="@drawable/ic_camera_alt_white_24dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="end|bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.design.widget.CoordinatorLayout>
 
     <LinearLayout
         android:gravity="center"
@@ -66,7 +79,7 @@
             <EditText
                 android:id="@+id/editLocalizacao"
                 android:hint="Localização: "
-                android:inputType="date"
+                android:inputType="text"
                 android:layout_weight="4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />

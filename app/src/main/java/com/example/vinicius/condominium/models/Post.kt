@@ -8,7 +8,8 @@ class Post(
         @SerializedName("atualizado_em_hora_br") var hora: String,
         @SerializedName("tipo") var tipo: String,
         @SerializedName("status_post") var status: String,
-        @SerializedName("informante") var informante: Perfil
+        @SerializedName("informante") var informante: Perfil,
+        @SerializedName("foto") var foto: String
     ){
 
 }
