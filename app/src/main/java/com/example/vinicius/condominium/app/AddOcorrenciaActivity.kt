@@ -29,9 +29,13 @@ import java.net.URI
 import java.util.*
 import android.R.attr.data
 import android.support.v4.app.NotificationCompat.getExtras
+import android.support.v7.widget.Toolbar
+import kotlinx.android.synthetic.main.content_add_ocorrencia.*
 
 
 class AddOcorrenciaActivity : AppCompatActivity() {
+
+    lateinit var toolbar: Toolbar
 
     lateinit private var apiService: APIService
     lateinit private var securityPreferences: SecurityPreferences
@@ -45,6 +49,7 @@ class AddOcorrenciaActivity : AppCompatActivity() {
     }
 
     private fun initComponents() {
+        setupToolbar()
         securityPreferences = SecurityPreferences(this)
         apiService = APIService(getToken())
 
@@ -111,5 +116,19 @@ class AddOcorrenciaActivity : AppCompatActivity() {
 
     private fun getToken(): String {
         return securityPreferences.getSavedString(CondomaisConstants.KEY.TOKEN_LOGADO)
+    }
+
+    private fun setupToolbar(){
+        toolbar = findViewById(R.id.toolbarAddOcorrencia)
+        setSupportActionBar(toolbar)
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+
+        toolbar.setNavigationOnClickListener { view ->
+            val intent = Intent(this,MainActivity::class.java)
+            startActivityForResult(intent,0)
+            this@AddOcorrenciaActivity.overridePendingTransition(R.anim.righttoleft,R.anim.stable)
+        }
     }
 }
