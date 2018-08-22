@@ -3,6 +3,7 @@ package com.example.vinicius.condominium.app
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.widget.Toast
@@ -38,10 +39,21 @@ class VisitantesActivity : AppCompatActivity() {
         setupToolbar()
 
         getVisitantes()
+
+        fabAddVisitantes.setOnClickListener {
+            startActivity(Intent(this@VisitantesActivity, AddVisitanteActivity::class.java))
+        }
+
+        swipeVisitantes.setColorSchemeResources(R.color.colorAccent2)
+
+        swipeVisitantes.setOnRefreshListener { Handler().postDelayed({
+            swipeVisitantes.isRefreshing = false
+            getVisitantes()
+        }, 1000) }
     }
 
     private fun setupToolbar(){
-        toolbar = findViewById(R.id.toolbarEntrada)
+        toolbar = findViewById(R.id.toolbarVisitantes)
         setSupportActionBar(toolbar)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
