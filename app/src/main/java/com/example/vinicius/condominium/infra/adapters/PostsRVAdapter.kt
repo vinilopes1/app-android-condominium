@@ -13,7 +13,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.vinicius.condominium.R
 import com.example.vinicius.condominium.app.EntradaActivity
+import com.example.vinicius.condominium.app.OcorrenciaActivity
 import com.example.vinicius.condominium.models.Post
+import com.example.vinicius.condominium.utils.CondomaisConstants
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_ocorrencia.view.*
 import kotlinx.android.synthetic.main.item_timeline_entrada.view.*
@@ -90,7 +92,7 @@ class PostsRVAdapter(
             if (!post.foto.isNullOrBlank()){
                 Picasso.get()
                         .load(post.foto)
-                        .error(R.drawable.ic_alarm_yellow_48dp)
+                        .error(R.drawable.no_image)
                         .into(holder.itemView.imgOcorrencia)
             }
         }else{
@@ -105,6 +107,11 @@ class PostsRVAdapter(
                     holder.txtTipoPost.setTextColor(activity.resources.getColor(R.color.draw_red))
                 }
 
+                "Entrada liberada" ->{
+                    //holder.itemView.icStatus.setImageResource(R.drawable.ic_cancel_black_18dp)
+                    holder.txtTipoPost.setTextColor(activity.resources.getColor(R.color.md_blue_400))
+                }
+
                 else -> null
             }
         }
@@ -114,6 +121,12 @@ class PostsRVAdapter(
     private fun onClick(post: Post, view: View?) {
         if (post.tipo == "entrada") {
             val intent = Intent(activity, EntradaActivity::class.java)
+            intent.putExtra(CondomaisConstants.SELECTS.ENTRADA_SELECIONADA, post.id)
+            activity.startActivityForResult(intent, 0)
+            activity.overridePendingTransition(R.anim.lefttoright, R.anim.stable)
+        }else{
+            val intent = Intent(activity, OcorrenciaActivity::class.java)
+            intent.putExtra(CondomaisConstants.SELECTS.OCORRENCIA_SELECIONADA, post.id)
             activity.startActivityForResult(intent, 0)
             activity.overridePendingTransition(R.anim.lefttoright, R.anim.stable)
         }

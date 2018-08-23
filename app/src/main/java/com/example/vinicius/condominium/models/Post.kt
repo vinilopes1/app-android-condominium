@@ -12,4 +12,6 @@ class Post(
         @SerializedName("foto") var foto: String
     ){
 
+    @SerializedName("id") var id: Int = 0
+
 }

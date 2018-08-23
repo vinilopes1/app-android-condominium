@@ -10,4 +10,9 @@ class Ocorrencia(
     var publico: Boolean
     ) {
 
+    @SerializedName("status") lateinit var status: String
+    @SerializedName("informante") lateinit var informante: Perfil
+    @SerializedName("foto") lateinit var foto: String
+    @SerializedName("comentarios") lateinit var comentarios: MutableList<Comentario>
+
 }

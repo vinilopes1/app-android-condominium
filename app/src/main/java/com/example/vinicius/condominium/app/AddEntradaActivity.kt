@@ -1,16 +1,19 @@
 package com.example.vinicius.condominium.app
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import android.widget.Toolbar
 import com.example.vinicius.condominium.R
 import com.example.vinicius.condominium.infra.api.APIService
 import com.example.vinicius.condominium.models.Entrada
 import com.example.vinicius.condominium.utils.CondomaisConstants
 import com.example.vinicius.condominium.utils.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_add_entrada.*
+import kotlinx.android.synthetic.main.content_add_entrada.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,8 +22,10 @@ import java.util.*
 
 class AddEntradaActivity : AppCompatActivity() {
 
-    lateinit private var apiService: APIService
-    lateinit private var securityPreferences: SecurityPreferences
+    lateinit private var toolbar: Toolbar
+
+    private lateinit var apiService: APIService
+    private lateinit var securityPreferences: SecurityPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +35,7 @@ class AddEntradaActivity : AppCompatActivity() {
     }
 
     private fun initComponents() {
+        setupToolbar()
         securityPreferences = SecurityPreferences(this)
         apiService = APIService(getToken())
     }
@@ -43,7 +49,7 @@ class AddEntradaActivity : AppCompatActivity() {
                     Toast.makeText(this@AddEntradaActivity, "Adicionado com sucesso!", Toast.LENGTH_SHORT).show()
                     finish()
                 }else{
-                    Toast.makeText(this@AddEntradaActivity, "Erro " + response.code(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AddEntradaActivity, "Erro " + response.errorBody()!!.string(), Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -56,8 +62,9 @@ class AddEntradaActivity : AppCompatActivity() {
     private fun criarEntrada(): Entrada {
         var descricao = editDescricaoEntrada.text.toString()
         var data = editDataEntrada.text.toString()
+        var hora = editHoraEntrada.text.toString()
 
-        return Entrada(descricao, data)
+        return Entrada(descricao, data, hora)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -71,6 +78,19 @@ class AddEntradaActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupToolbar(){
+        setSupportActionBar(toolbarAddEntrada)
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+
+        toolbarAddEntrada.setNavigationOnClickListener { view ->
+            val intent = Intent(this,MainActivity::class.java)
+            startActivityForResult(intent,0)
+            this@AddEntradaActivity.overridePendingTransition(R.anim.righttoleft,R.anim.stable)
+        }
     }
 
     private fun getToken(): String {

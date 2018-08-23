@@ -87,7 +87,7 @@ class AddOcorrenciaActivity : AppCompatActivity() {
                     Toast.makeText(this@AddOcorrenciaActivity, "Adicionado com sucesso!", Toast.LENGTH_SHORT).show()
                     finish()
                 }else{
-                    Toast.makeText(this@AddOcorrenciaActivity, "Erro: " + response.code() + response.message().toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AddOcorrenciaActivity, "Erro: " + response.code() + response.errorBody()!!.string(), Toast.LENGTH_SHORT).show()
                 }
             }
         })

@@ -38,7 +38,7 @@ class VisitantesRVAdapater(
 
         var visitante = visitantes.get(position)
 
-        holder.itemView.txtNomeMoradorVisitante.text = "Registrado por " + visitante.morador.nome
+        holder.itemView.txtNomeMoradorVisitante.text = "Registrado por Hipólito Júnior"
         holder.itemView.txtNomeVisitante.text = visitante.nome
 
     }
