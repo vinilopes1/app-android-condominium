@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.vinicius.condominium.R
 import com.example.vinicius.condominium.app.EntradaActivity
@@ -37,7 +38,7 @@ class PostsRVAdapter(
         lateinit var txtTipoPost: TextView
         lateinit var txtDescricao: TextView
         lateinit var txtLocalizacao: TextView
-        //lateinit var imgOcorrencia: ImageView
+//        lateinit var imgOcorrencia: ImageView
 
         init{
 
@@ -47,7 +48,7 @@ class PostsRVAdapter(
             txtTipoPost = itemView!!.findViewById(R.id.txtTipoPost)
             txtDescricao = itemView!!.findViewById(R.id.txtDescricao)
             txtLocalizacao = itemView!!.findViewById(R.id.txtLocalizacao)
-            //imgOcorrencia = itemView!!.findViewById(R.id.imgOcorrencia)
+//            imgOcorrencia = itemView!!.findViewById(R.id.imgOcorrencia)
 
         }
     }
@@ -88,13 +89,6 @@ class PostsRVAdapter(
 
         if(post.tipo == "ocorrencia"){
             holder.txtLocalizacao.text = "Quadra Poliesportiva"
-
-            if (!post.foto.isNullOrBlank()){
-                Picasso.get()
-                        .load(post.foto)
-                        .error(R.drawable.no_image)
-                        .into(holder.itemView.imgOcorrencia)
-            }
         }else{
             when(post.status){ //Informada, Lida, Atendida, Cancelada or Expirada
                 "Entrada informada" -> {
