@@ -3,10 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.AddEntradaActivity">
+    tools:context=".app.OcorrenciaActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -14,7 +13,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarAddEntrada"
+            android:id="@+id/toolbarOcorrencia"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/ToolbarColorBack"
@@ -34,10 +33,10 @@
                     android:gravity="center_vertical|left">
 
                     <TextView
-                        android:id="@+id/screen_title_add_visitante"
+                        android:id="@+id/screen_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Adicionar Entrada"
+                        android:text="Ocorrência"
                         android:textColor="#282828"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
@@ -46,10 +45,11 @@
 
             </LinearLayout>
 
+
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_add_entrada"/>
+    <include layout="@layout/content_ocorrencia" />
 
 </android.support.design.widget.CoordinatorLayout>

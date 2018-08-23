@@ -27,8 +27,7 @@
         <activity
             android:name=".app.AddEntradaActivity"
             android:label="Adicionar entrada"
-            android:parentActivityName=".app.MainActivity"
-            android:theme="@style/AppTheme" />
+            android:parentActivityName=".app.MainActivity" />
         <activity
             android:name=".app.AddOcorrenciaActivity"
             android:label="Adicionar ocorrência"
@@ -42,7 +41,8 @@
             android:name=".app.VisitantesActivity" />
         <activity
             android:name=".app.AddVisitanteActivity"
-            android:parentActivityName=".app.VisitantesActivity"></activity>
+            android:parentActivityName=".app.VisitantesActivity" />
+        <activity android:name=".app.OcorrenciaActivity"></activity>
     </application>
 
 </manifest>
