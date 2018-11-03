@@ -118,6 +118,7 @@
 
         <ImageView
             android:id="@+id/imgOcorrencia"
+            android:src="@drawable/no_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="0dp"

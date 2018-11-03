@@ -1,5 +1,6 @@
 package com.example.vinicius.condominium.app
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit private var apiService: APIService
     lateinit private var securityPreferences: SecurityPreferences
+    lateinit private var progressDialog: ProgressDialog
 
     lateinit var toggleProf: ImageView
     lateinit var mSwipeRefresh: SwipeRefreshLayout
@@ -254,6 +256,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        getAvisos()
+        getPosts()
+    }
+
     fun exibirListaPost(posts: MutableList<Post>){
         val adapter = PostsRVAdapter(this@MainActivity, this!!.applicationContext, posts!!)
 
@@ -269,6 +277,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getPosts() {
+        progressDialog.show()
         val call = apiService.postEndPoint.getPosts()
 
         call.enqueue(object: Callback<MutableList<Post>> {
@@ -278,16 +287,18 @@ class MainActivity : AppCompatActivity() {
                 }else{
                     Toast.makeText(this@MainActivity, " erro. " + response.code() + " " + response.errorBody().toString(), Toast.LENGTH_SHORT).show()
                 }
+                progressDialog.hide()
             }
 
             override fun onFailure(call: Call<MutableList<Post>>?, t: Throwable?) {
                 Toast.makeText(this@MainActivity, "Falha na conexão!", Toast.LENGTH_SHORT).show()
+                progressDialog.hide()
             }
         })
     }
 
     private fun getAvisos() {
-
+        progressDialog.show()
         val avisosCall = apiService.avisoEndPoint.getAvisos()
 
         avisosCall.enqueue(object: Callback<MutableList<Aviso>>{
@@ -297,10 +308,12 @@ class MainActivity : AppCompatActivity() {
                 }else{
                     Toast.makeText(this@MainActivity, "Erro" + response.message() + " : " + response.errorBody().toString(), Toast.LENGTH_SHORT).show()
                 }
+                progressDialog.hide()
             }
 
             override fun onFailure(call: Call<MutableList<Aviso>>?, t: Throwable?) {
                 Toast.makeText(this@MainActivity, "Falha na conexão!", Toast.LENGTH_SHORT).show()
+                progressDialog.hide()
             }
         })
     }
@@ -319,6 +332,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initComponents() {
+        progressDialog = initProgressDialog()
         securityPreferences = SecurityPreferences(applicationContext)
         apiService = APIService(getToken())
 
@@ -336,7 +350,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupFab(){
-
         fab = findViewById(R.id.fab1)
         fabEntrada = findViewById(R.id.fab_entrada)
         fabOcorrencia = findViewById(R.id.fab_ocorrencia)
@@ -353,9 +366,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         fabEntrada.setOnClickListener { view ->
-            openFragment()
-//            val intent = Intent(this, AddEntradaActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, AddEntradaActivity::class.java)
+            startActivity(intent)
         }
 
         fabOcorrencia.setOnClickListener { view ->
@@ -368,6 +380,12 @@ class MainActivity : AppCompatActivity() {
         securityPreferences.limpar()
         finish()
         startActivity(Intent(this, LoginActivity::class.java))
+    }
+
+    private fun initProgressDialog(): ProgressDialog {
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Aguarde...")
+        return progressDialog
     }
 
     private fun openFragment(){

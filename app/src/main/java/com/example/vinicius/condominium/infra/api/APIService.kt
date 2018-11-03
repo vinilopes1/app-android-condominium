@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 public class APIService{
 
-    private val BASE_URL = "http://192.168.0.24:8000/api/v1/"
+    val BASE_URL = "http://api-condomais.herokuapp.com/api/v1/"
 
     private lateinit var retrofit:Retrofit
     private lateinit var interceptorAPI: InterceptorAPI
