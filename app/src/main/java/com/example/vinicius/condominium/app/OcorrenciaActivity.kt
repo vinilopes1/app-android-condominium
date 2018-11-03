@@ -65,7 +65,7 @@ class OcorrenciaActivity : AppCompatActivity() {
                 if (response!!.isSuccessful){
                     Toast.makeText(this@OcorrenciaActivity, "Adicionado com Sucesso!", Toast.LENGTH_SHORT).show()
                     editComentarioOcorrenciaDetalhe.clearComposingText()
-                    getOcorrenciaDetalhe(getOcorrenciaSelecionada())
+                    this@OcorrenciaActivity.onRestart()
                 }else{
                     Toast.makeText(this@OcorrenciaActivity, response.errorBody()!!.string(), Toast.LENGTH_SHORT).show()
                 }

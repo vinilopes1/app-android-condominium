@@ -99,6 +99,7 @@
                 android:layout_height="wrap_content" />
 
             <Switch
+                android:id="@+id/switchPublicoOcorrencia"
                 android:textColor="@android:color/darker_gray"
                 android:text="Ocorrência Pública:"
                 android:layout_weight="4"

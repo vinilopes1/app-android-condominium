@@ -52,4 +52,40 @@
 
     <include layout="@layout/content_ocorrencia" />
 
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:focusable="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="6dp">
+
+        <EditText
+            android:id="@+id/editComentarioOcorrenciaDetalhe"
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="wrap_content"
+            android:hint="Digite seu comentário"
+            android:textColor="@color/draw_description"
+            android:textColorHint="@color/draw_description"
+            android:gravity="center_vertical|left"
+            android:background="@drawable/round_bg"
+            android:focusedByDefault="true"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            android:padding="14dp"
+            android:textSize="15dp"/>
+
+        <ImageView
+            android:id="@+id/btnAddComentarioOcorrencia"
+            android:src="@drawable/ic_menu_send"
+            android:layout_gravity="center_vertical|right"
+            android:layout_margin="4dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 </android.support.design.widget.CoordinatorLayout>

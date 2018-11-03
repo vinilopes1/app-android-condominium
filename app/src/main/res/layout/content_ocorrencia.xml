@@ -111,44 +111,11 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_gravity="end"
-            android:gravity="bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="6dp">
-
-            <EditText
-                android:id="@+id/editComentarioOcorrenciaDetalhe"
-                android:layout_width="0dp"
-                android:layout_weight="7"
-                android:layout_height="wrap_content"
-                android:hint="Digite seu comentário"
-                android:textColor="@color/draw_description"
-                android:textColorHint="@color/draw_description"
-                android:gravity="center_vertical|left"
-                android:background="@drawable/round_bg"
-                android:focusedByDefault="true"
-                android:inputType="text"
-                android:imeOptions="actionSearch"
-                android:padding="10dp"
-                android:textSize="15dp"/>
-
-            <ImageView
-                android:id="@+id/btnAddComentarioOcorrencia"
-                android:src="@drawable/ic_menu_send"
-                android:layout_margin="4dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvComentariosOcorrencia"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:paddingBottom="40dp"/>
 
     </LinearLayout>
 

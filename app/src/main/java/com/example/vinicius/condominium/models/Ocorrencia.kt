@@ -5,9 +5,9 @@ import java.io.File
 import java.io.FileOutputStream
 
 class Ocorrencia(
-    var descricao: String,
-    var localizacao: String,
-    var publico: Boolean
+        var descricao: String,
+        var localizacao: String,
+        var publico: Boolean
     ) {
 
     @SerializedName("status") lateinit var status: String
